@@ -25,5 +25,3 @@ set smarttab
 set clipboard=unnamed
 
 set nobackup
-
-set background=black
