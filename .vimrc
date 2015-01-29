@@ -1,6 +1,6 @@
 filetype plugin indent on
 
-colorscheme desert
+colorscheme koehler
 syntax on
 
 set encoding=utf8
@@ -33,3 +33,7 @@ set nobackup
 imap { {}<LEFT>
 imap [ []<LEFT>
 imap ( ()<LEFT>
+
+set guifont=Ricty\ Discord:h16
+set guifontwide=Ricty\ Discord:h16
+
