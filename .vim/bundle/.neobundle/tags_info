@@ -1,0 +1,10 @@
+ghcmod-vim
+neco-ghc
+neobundle.vim
+neocomplcache.vim
+nerdtree
+unite-haddock
+unite-haskellimport
+unite.vim
+vim-quickrun
+vim2hs
