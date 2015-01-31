@@ -27,7 +27,9 @@ NeoBundle 'eagletmt/unite-haddock'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-haskellimport'
-
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
 
 " Refer to |:NeoBundle-examples|.
 " Note: You don't set neobundle setting in .gvimrc!
@@ -62,6 +64,7 @@ set list
 set wildmenu
 
 set cursorline
+set cursorcolumn
 set listchars=tab:▸.,trail:_,eol:¬,extends:>,precedes:<,nbsp:%
 
 set shiftwidth=2
@@ -82,6 +85,10 @@ imap ( ()<LEFT>
 set guifont=Ricty\ Discord:h16
 set guifontwide=Ricty\ Discord:h16
 
+au BufRead,BufNewFile *.md set filetype=markdown
+
+set laststatus=2
+set statusline=%{b:charCounterCount}
 
 function! ZenkakuSpace()
     highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
@@ -95,3 +102,29 @@ if has('syntax')
     augroup END
     call ZenkakuSpace()
 endif
+
+augroup CharCounter
+    autocmd!
+    autocmd BufNew,BufEnter,BufWrite,InsertLeave * call <SID>Update()
+augroup END
+
+function! s:Update()
+    let b:charCounterCount = s:CharCount()
+endfunction
+
+function! s:CharCount()
+    let l:result = 0
+    for l:linenum in range(0, line('$'))
+        let l:line = getline(l:linenum)
+        let l:result += strlen(substitute(l:line, ".", "x", "g"))
+    endfor
+    return l:result
+endfunction
+
+augroup source-vimrc
+  autocmd!
+  autocmd BufWritePost *vimrc source $MYVIMRC | set foldmethod=marker
+  autocmd BufWritePost *gvimrc if has('gui_running') source $MYGVIMRC
+augroup END
+
+

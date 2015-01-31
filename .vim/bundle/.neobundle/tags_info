@@ -3,8 +3,11 @@ neco-ghc
 neobundle.vim
 neocomplcache.vim
 nerdtree
+open-browser.vim
+previm
 unite-haddock
 unite-haskellimport
 unite.vim
+vim-markdown
 vim-quickrun
 vim2hs
