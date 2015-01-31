@@ -86,9 +86,11 @@ set guifont=Ricty\ Discord:h16
 set guifontwide=Ricty\ Discord:h16
 
 au BufRead,BufNewFile *.md set filetype=markdown
+au BufRead,BufNewFile *.hs set filetype=haskell
 
 set laststatus=2
-set statusline=%{b:charCounterCount}
+set statusline=[PATH=%<%F]\ %m%r%h%w\ [POS=%l,%v][%p%%]\ [LEN=%L]\ 
+set statusline+=[NumOfChara=%{b:charCounterCount}]
 
 function! ZenkakuSpace()
     highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
