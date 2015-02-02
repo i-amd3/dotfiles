@@ -8,6 +8,7 @@ previm
 unite-haddock
 unite-haskellimport
 unite.vim
+vim-fugitive
 vim-markdown
 vim-quickrun
 vim2hs
