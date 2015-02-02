@@ -89,9 +89,14 @@ set guifontwide=Ricty\ Discord:h16
 au BufRead,BufNewFile *.md set filetype=markdown
 au BufRead,BufNewFile *.hs set filetype=haskell
 
+function! Date()
+  return strftime("%m/%d/%Y %H:%M")
+endfunction
+
 set laststatus=2
-set statusline=[PATH=%<%F]\ %m%r%h%w\ [POS=%l,%v][%p%%]\ [LEN=%L]\ 
-set statusline+=[NumOfChara=%{b:charCounterCount}]
+set statusline=[PATH=%<%F]\ %m%r%h%w\%=[POS=%l,%v][%p%%]\ [LEN=%L]\ 
+set statusline+=[NumOfChara=%{b:charCounterCount}]\ 
+set statusline+=[TIME=%{Date()}]
 
 function! ZenkakuSpace()
     highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
