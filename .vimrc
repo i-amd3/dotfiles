@@ -79,9 +79,12 @@ set clipboard=unnamed
 
 set nobackup
 
-imap { {}<LEFT>
-imap [ []<LEFT>
-imap ( ()<LEFT>
+inoremap { {}<LEFT>
+inoremap [ []<LEFT>
+inoremap ( ()<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+inoremap < <><LEFT>
 
 set guifont=Ricty\ Discord:h16
 set guifontwide=Ricty\ Discord:h16
@@ -136,5 +139,12 @@ augroup source-vimrc
 augroup END
 
 nnoremap <CR> i<CR><ESC>
-nnoremap <SPACE> i<SPACE><ESC>
-nnoremap <TAB> i<TAB><ESC>
+nnoremap <SPACE> i<SPACE><RIGHT><ESC>
+nnoremap <TAB> i<TAB><RIGHT><ESC>
+inoremap <C-j> <DOWN>
+inoremap <C-k> <UP>
+inoremap <C-h> <LEFT>
+inoremap <C-l> <RIGHT>
+
+nnoremap 0 $
+nnoremap 1 0
