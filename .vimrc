@@ -135,4 +135,6 @@ augroup source-vimrc
   autocmd BufWritePost *gvimrc if has('gui_running') source $MYGVIMRC
 augroup END
 
-
+nnoremap <CR> i<CR><ESC>
+nnoremap <SPACE> i<SPACE><ESC>
+nnoremap <TAB> i<TAB><ESC>
