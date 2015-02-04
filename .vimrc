@@ -148,3 +148,35 @@ inoremap <C-l> <RIGHT>
 
 nnoremap 0 $
 nnoremap 1 0
+
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
+highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
+
+highlight DiffAdd    gui=bold guifg=green ctermbg=darkgreen
+highlight DiffDelete gui=bold guifg=green ctermbg=darkred
+highlight DiffChange gui=bold guifg=green ctermbg=darkblue
+highlight DiffText   gui=bold guifg=green ctermbg=blue
+
+let g:git_diff_normal="git-diff-normal"
+let g:git_diff_normal_opts=["--diff-algorithm=histogram"]
+
+function! GitDiffNormal()
+  let args=[g:git_diff_normal]
+  if &diffopt =~ "iwhite"
+    call add(args, "--ignore-all-space")
+  endif
+  call extend(args, g:git_diff_normal_opts)
+  call extend(args, [v:fname_in, v:fname_new])
+  let cmd="!" . join(args, " ") . ">" . v:fname_out
+  silent execute cmd
+  redraw!
+endfunction
+
+if executable(g:git_diff_normal)
+  call system(g:git_diff_normal)
+  if v:shell_error == 0
+    set diffexpr=GitDiffNormal()
+  endif
+endif
