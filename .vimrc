@@ -18,18 +18,22 @@ call neobundle#begin(expand('~/dotfiles/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " My Bundles here:
+NeoBundle 'Shougo/neocomplcache.vim'
+NeoBundle 'Shougo/unite.vim'
+
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'thinca/vim-quickrun'
+
 NeoBundle 'dag/vim2hs'
 NeoBundle 'eagletmt/ghcmod-vim'
-NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'eagletmt/neco-ghc'
 NeoBundle 'eagletmt/unite-haddock'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-haskellimport'
+
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
+
 NeoBundle 'tpope/vim-fugitive'
 
 " Refer to |:NeoBundle-examples|.
