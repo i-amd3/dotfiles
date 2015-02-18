@@ -81,8 +81,6 @@ set smarttab
 set clipboard+=unnamed
 set clipboard=unnamed
 
-set nobackup
-
 inoremap { {}<LEFT>
 inoremap [ []<LEFT>
 inoremap ( ()<LEFT>
@@ -101,9 +99,9 @@ function! Date()
 endfunction
 
 set laststatus=2
-set statusline=[PATH=%<%F]\ %m%r%h%w\%=[POS=%l,%v][%p%%]\ [LEN=%L]\ 
-set statusline+=[NumOfChara=%{b:charCounterCount}]\ 
-set statusline+=[TIME=%{Date()}]
+set statusline=%<%F\ %m%r%h%w\%=%l,%v\ %p%%\ %L\ 
+set statusline+=%{b:charCounterCount}\ 
+set statusline+=%{Date()}
 
 function! ZenkakuSpace()
     highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
@@ -142,7 +140,7 @@ augroup source-vimrc
   autocmd BufWritePost *gvimrc if has('gui_running') source $MYGVIMRC
 augroup END
 
-nnoremap <CR> i<CR><ESC>
+nnoremap <CR> a<CR><ESC>
 nnoremap <SPACE> i<SPACE><RIGHT><ESC>
 nnoremap <TAB> i<TAB><RIGHT><ESC>
 inoremap <C-j> <DOWN>
@@ -158,10 +156,10 @@ highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
 
-highlight DiffAdd    gui=bold guifg=green ctermbg=darkgreen
-highlight DiffDelete gui=bold guifg=green ctermbg=darkred
-highlight DiffChange gui=bold guifg=green ctermbg=darkblue
-highlight DiffText   gui=bold guifg=green ctermbg=blue
+highlight DiffAdd    gui=none guifg=green guibg=darkgreen
+highlight DiffDelete gui=none guifg=green guibg=darkred
+highlight DiffChange gui=none guifg=green guibg=darkblue
+highlight DiffText   gui=none guifg=green guibg=blue
 
 let g:git_diff_normal="git-diff-normal"
 let g:git_diff_normal_opts=["--diff-algorithm=histogram"]
@@ -199,9 +197,9 @@ nnoremap wH <C-w>H
 nnoremap wL <C-w>L
 
 nnoremap wvs :vs<CR>
-nnoremap wsp :vp<CR>
+nnoremap wsp :sp<CR>
 nnoremap wvsn :vs enew<CR>
-nnoremap wspn :vp enew<CR>
+nnoremap wspn :sp enew<CR>
 
 nnoremap w= <C-w>=
 nnoremap w> <C-w>>
@@ -211,3 +209,7 @@ nnoremap w- <C-w>-
 
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 nnoremap <F2> :tabe $MYVIMRC<CR>
+
+set nobackup
+set noswapfile
+
