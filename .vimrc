@@ -70,7 +70,7 @@ set wildmenu
 
 set cursorline
 set cursorcolumn
-set listchars=tab:▸.,trail:_,eol:¬,extends:>,precedes:<,nbsp:%
+set listchars=tab:?.,trail:_,eol:￢,extends:>,precedes:<,nbsp:%
 
 set shiftwidth=2
 set softtabstop=2
@@ -184,3 +184,30 @@ if executable(g:git_diff_normal)
     set diffexpr=GitDiffNormal()
   endif
 endif
+
+nnoremap <S-a> <S-i>
+nnoremap <S-i> <S-a>
+
+nnoremap wj <C-w>j
+nnoremap wk <C-w>k
+nnoremap wh <C-w>h
+nnoremap wl <C-w>l
+
+nnoremap wJ <C-w>J
+nnoremap wK <C-w>K
+nnoremap wH <C-w>H
+nnoremap wL <C-w>L
+
+nnoremap wvs :vs<CR>
+nnoremap wsp :vp<CR>
+nnoremap wvsn :vs enew<CR>
+nnoremap wspn :vp enew<CR>
+
+nnoremap w= <C-w>=
+nnoremap w> <C-w>>
+nnoremap w< <C-w><
+nnoremap w+ <C-w>+
+nnoremap w- <C-w>-
+
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
+nnoremap <F2> :tabe $MYVIMRC<CR>
