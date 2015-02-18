@@ -70,7 +70,7 @@ set wildmenu
 
 set cursorline
 set cursorcolumn
-set listchars=tab:?.,trail:_,eol:￢,extends:>,precedes:<,nbsp:%
+set listchars=tab:>.,trail:_,extends:>,precedes:<,nbsp:%
 
 set shiftwidth=2
 set softtabstop=2
