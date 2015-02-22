@@ -224,3 +224,10 @@ set noswapfile
 
 let $PATH = $PATH . ':' . expand('~/Library/Haskell/bin/')
 
+nnoremap gits :Gstatus<CR>
+nnoremap gita :Gwrite<CR>
+nnoremap gitr :Gread<CR>
+nnoremap gitm :Gremove<CR>
+nnoremap gitd :Gdiff<CR>
+
+
