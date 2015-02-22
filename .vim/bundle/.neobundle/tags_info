@@ -12,3 +12,4 @@ vim-fugitive
 vim-markdown
 vim-quickrun
 vim2hs
+vimproc.vim

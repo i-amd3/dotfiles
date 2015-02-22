@@ -18,6 +18,15 @@ call neobundle#begin(expand('~/dotfiles/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " My Bundles here:
+NeoBundle 'Shougo/vimproc.vim' , {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/unite.vim'
 
@@ -212,4 +221,6 @@ nnoremap <F2> :tabe $MYVIMRC<CR>
 
 set nobackup
 set noswapfile
+
+let $PATH = $PATH . ':' . expand('~/Library/Haskell/bin/')
 
