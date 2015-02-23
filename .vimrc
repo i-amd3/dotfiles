@@ -223,6 +223,7 @@ set nobackup
 set noswapfile
 
 let $PATH = $PATH . ':' . expand('~/Library/Haskell/bin/')
+let $PATH = $PATH . ':' . expand('~/bin/')
 
 nnoremap gits :Gstatus<CR>
 nnoremap gita :Gwrite<CR>
@@ -230,10 +231,35 @@ nnoremap gitr :Gread<CR>
 nnoremap gitm :Gremove<CR>
 nnoremap gitd :Gdiff<CR>
 
-nnoremap hsrun :QuickRun haskell<CR>
-let g:quickrun_config = {}
+command! Hsrun :QuickRun haskell
+let g:quickrun_config = {
+      \ "_" : {
+      \   "runner" : "vimproc",
+      \   "runner/vimproc/updatetime" : 60
+      \ },
+      \}
 let g:quickrun_config.haskell = {
   \ 'outputter/buffer/split' : ":botright",
   \ 'outputter/buffer/clise_on_empty' : 1
   \}
+nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+
+command! -nargs=? FiveTenets call Fivetenets(<args>)
+nnoremap ft :FiveTenets<CR>
+function! Fivetenets(...)
+  let rnd = system("getRnd 5")
+  let n = rnd - 1
+  let ft = ["Give a good greeting!"
+        \,"Try not to give up!"
+        \,"Sleep well, eat well!"
+        \,"If you're troubled, talk to someone!"
+        \,"You're likely to succeed if you try!"]
+  let t = ft[n]
+  echo "Hero Club Five Tenets!!"
+  echo t
+endfunction
+augroup HeroClubMessage
+    autocmd!
+    autocmd BufNewFile * call Fivetenets()
+augroup END
 
