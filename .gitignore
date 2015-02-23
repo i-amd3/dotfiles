@@ -1,4 +1,4 @@
-.vim/autoload/~
-.vim/bundle/~
-.vim/plugin/~
+.vim/autoload/*
+.vim/bundle/*
+.vim/plugin/*
 
