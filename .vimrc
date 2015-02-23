@@ -246,18 +246,20 @@ nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() 
 
 command! -nargs=? FiveTenets call Fivetenets(<args>)
 nnoremap ft :FiveTenets<CR>
+
 function! Fivetenets(...)
-  let rnd = system("getRnd 5")
-  let n = rnd - 1
   let ft = ["Give a good greeting!"
         \,"Try not to give up!"
         \,"Sleep well, eat well!"
         \,"If you're troubled, talk to someone!"
         \,"You're likely to succeed if you try!"]
+  let rnd = system("getRnd 5")
+  let n = rnd - 1
   let t = ft[n]
   echo "Hero Club Five Tenets!!"
   echo t
 endfunction
+
 augroup HeroClubMessage
     autocmd!
     autocmd BufNewFile * call Fivetenets()
