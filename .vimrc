@@ -230,11 +230,4 @@ nnoremap gitr :Gread<CR>
 nnoremap gitm :Gremove<CR>
 nnoremap gitd :Gdiff<CR>
 
-nnoremap hsrun :QuickRun haskell<CR>
-let g:quickrun_config = {}
-let g:quickrun_config.haskell = {
-  \ 'outputter/buffer/split' : ":botright",
-  \ 'outputter/buffer/clise_on_empty' : 1
-  \}
-
 
