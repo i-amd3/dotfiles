@@ -265,3 +265,7 @@ augroup HeroClubMessage
     autocmd BufNewFile * call Fivetenets()
 augroup END
 
+inoremap <C-f> <PageDown>
+inoremap <C-b> <PageUp>
+
+
