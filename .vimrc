@@ -23,8 +23,8 @@ NeoBundle 'Shougo/vimproc.vim' , {
 \ }
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimfiler'
 
-NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'thinca/vim-quickrun'
 
 NeoBundle 'dag/vim2hs'
@@ -202,8 +202,8 @@ nnoremap w< <C-w><
 nnoremap w+ <C-w>+
 nnoremap w- <C-w>-
 
-nnoremap .l gt
-nnoremap .h gT
+nnoremap <C-l> gt
+nnoremap <C-h> gT
 
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 nnoremap <F2> :tabe $MYVIMRC<CR>
@@ -258,6 +258,8 @@ augroup END
 inoremap <C-f> <PageDown>
 inoremap <C-b> <PageUp>
 
-let NERDTreeShowHidden = 1
-nnoremap <D-e> :NERDTreeToggle<CR>
+nnoremap <D-E> :VimFiler<CR>
+nnoremap <D-e> :VimFiler -split -winwidth=30 -toggle -no-quit<CR>
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_safe_mode_by_default = 0
 
