@@ -202,6 +202,9 @@ nnoremap w< <C-w><
 nnoremap w+ <C-w>+
 nnoremap w- <C-w>-
 
+nnoremap .l gt
+nnoremap .h gT
+
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 nnoremap <F2> :tabe $MYVIMRC<CR>
 
@@ -256,5 +259,5 @@ inoremap <C-f> <PageDown>
 inoremap <C-b> <PageUp>
 
 let NERDTreeShowHidden = 1
-nnoremap <silent><D-e> :NERDTreeToggle<CR>
+nnoremap <D-e> :NERDTreeToggle<CR>
 
