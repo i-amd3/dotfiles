@@ -24,6 +24,7 @@ NeoBundle 'Shougo/vimproc.vim' , {
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
+NeoBundle 'Shougo/vimshell.vim'
 
 NeoBundle 'thinca/vim-quickrun'
 
@@ -262,4 +263,6 @@ nnoremap <D-E> :VimFiler<CR>
 nnoremap <D-e> :VimFiler -split -winwidth=30 -toggle -no-quit<CR>
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
+
+nnoremap ,vs :VimShell<CR>
 
