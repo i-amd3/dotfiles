@@ -43,8 +43,6 @@ call neobundle#end()
 
 filetype plugin indent on
 
-NeoBundleCheck
-
 
 colorscheme koehler
 syntax on
@@ -213,11 +211,12 @@ set noswapfile
 let $PATH = $PATH . ':' . expand('~/Library/Haskell/bin/')
 let $PATH = $PATH . ':' . expand('~/bin/')
 
-nnoremap gits :Gstatus<CR>
-nnoremap gita :Gwrite<CR>
-nnoremap gitr :Gread<CR>
-nnoremap gitm :Gremove<CR>
-nnoremap gitd :Gdiff<CR>
+nnoremap ,gs :Gstatus<CR>
+nnoremap ,ga :Gwrite<CR>
+nnoremap ,gr :Gread<CR>
+nnoremap ,gm :Gremove<CR>
+nnoremap ,gd :Gdiff<CR>
+nnoremap ,gc :Gcommit<CR>
 
 command! Hsrun :QuickRun haskell
 let g:quickrun_config = {
@@ -233,7 +232,7 @@ let g:quickrun_config.haskell = {
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 
 command! -nargs=? FiveTenets call Fivetenets(<args>)
-nnoremap ft :FiveTenets<CR>
+nnoremap ,ft :FiveTenets<CR>
 
 function! Fivetenets(...)
   let ft = ["Give a good greeting!"
@@ -255,4 +254,7 @@ augroup END
 
 inoremap <C-f> <PageDown>
 inoremap <C-b> <PageUp>
+
+let NERDTreeShowHidden = 1
+nnoremap <silent><D-e> :NERDTreeToggle<CR>
 
