@@ -259,10 +259,11 @@ augroup END
 inoremap <C-f> <PageDown>
 inoremap <C-b> <PageUp>
 
-nnoremap <D-E> :VimFiler<CR>
-nnoremap <D-e> :VimFiler -split -winwidth=30 -toggle -no-quit<CR>
+nnoremap <F3> :VimFiler<CR>
+nnoremap <D-e> :VimFilerExplorer -split -winwidth=30 -toggle -no-quit<CR>
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
 
-nnoremap ,vs :VimShell<CR>
+nnoremap <F4> :VimShell<CR>
+nnoremap ,vs :VimShellPop<CR>
 
