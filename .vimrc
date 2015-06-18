@@ -28,12 +28,6 @@ NeoBundle 'Shougo/vimshell.vim'
 
 NeoBundle 'thinca/vim-quickrun'
 
-NeoBundle 'dag/vim2hs'
-NeoBundle 'eagletmt/ghcmod-vim'
-NeoBundle 'eagletmt/neco-ghc'
-NeoBundle 'eagletmt/unite-haddock'
-NeoBundle 'ujihisa/unite-haskellimport'
-
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
