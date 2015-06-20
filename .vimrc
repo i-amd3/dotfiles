@@ -269,9 +269,13 @@ nnoremap <F4> :VimShell<CR>
 nnoremap ,vs :VimShellPop<CR>
 
 autocmd BufWritePost *.hs GhcModCheckAndLintAsync
-nnoremap ,gmt :GhcModType<CR>
-nnoremap ,gmtc :GhcModTypeClear<CR>
+nnoremap <Space>ht :GhcModType<CR>
+nnoremap <Space>hc :GhcModTypeClear<CR>
+nnoremap <Space>hi :GhcModTypeInsert<CR>
 
-setlocal omnifunc=necoghc#omnifunc
-let g:ycm_semantic_triggers = {'haskell' : ['.']}
+let g:neocomplete#enable_at_startup = 1
+autocmd BufEnter *.hs setlocal omnifunc=necoghc#omnifunc
+autocmd BufEnter *.hs let g:ycm_semantic_triggers = {'haskell' : ['.']}
+autocmd BufEnter *.hs let g:necoghc_enable_detailed_browse = 1
+
 
