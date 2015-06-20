@@ -21,7 +21,7 @@ NeoBundle 'Shougo/vimproc.vim' , {
 \     'unix' : 'gmake',
 \    },
 \ }
-NeoBundle 'Shougo/neocomplcache.vim'
+NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimshell.vim'
@@ -267,4 +267,11 @@ let g:vimfiler_safe_mode_by_default = 0
 
 nnoremap <F4> :VimShell<CR>
 nnoremap ,vs :VimShellPop<CR>
+
+autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+nnoremap ,gmt :GhcModType<CR>
+nnoremap ,gmtc :GhcModTypeClear<CR>
+
+setlocal omnifunc=necoghc#omnifunc
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
