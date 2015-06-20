@@ -31,8 +31,6 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'dag/vim2hs'
 NeoBundle 'eagletmt/ghcmod-vim'
 NeoBundle 'eagletmt/neco-ghc'
-NeoBundle 'eagletmt/unite-haddock'
-NeoBundle 'ujihisa/unite-haskellimport'
 NeoBundle 'scrooloose/syntastic'
 
 NeoBundle 'plasticboy/vim-markdown'
@@ -274,8 +272,7 @@ nnoremap <Space>hc :GhcModTypeClear<CR>
 nnoremap <Space>hi :GhcModTypeInsert<CR>
 
 let g:neocomplete#enable_at_startup = 1
-autocmd BufEnter *.hs setlocal omnifunc=necoghc#omnifunc
-autocmd BufEnter *.hs let g:ycm_semantic_triggers = {'haskell' : ['.']}
-autocmd BufEnter *.hs let g:necoghc_enable_detailed_browse = 1
-
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+autocmd FileType haskell let g:ycm_semantic_triggers = {'haskell' : ['.']}
+autocmd FileType haskell let g:necoghc_enable_detailed_browse = 1
 
