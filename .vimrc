@@ -88,8 +88,8 @@ inoremap < <><LEFT>
 set guifont=Ricty\ Discord:h16
 set guifontwide=Ricty\ Discord:h16
 
-au BufRead,BufNewFile *.md set filetype=markdown
-au BufRead,BufNewFile *.hs set filetype=haskell
+autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
+autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
 
 function! Date()
   return strftime("%m/%d/%Y %H:%M")
