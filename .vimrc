@@ -32,6 +32,8 @@ NeoBundle 'dag/vim2hs'
 NeoBundle 'eagletmt/ghcmod-vim'
 NeoBundle 'eagletmt/neco-ghc'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'Twinside/vim-hoogle'
+NeoBundle 'ujihisa/unite-haskellimport'
 
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
@@ -266,10 +268,10 @@ let g:vimfiler_safe_mode_by_default = 0
 nnoremap <F4> :VimShell<CR>
 nnoremap ,vs :VimShellPop<CR>
 
-autocmd BufWritePost *.hs GhcModCheckAndLintAsync
-nnoremap <Space>ht :GhcModType<CR>
-nnoremap <Space>hc :GhcModTypeClear<CR>
-nnoremap <Space>hi :GhcModTypeInsert<CR>
+autocmd FileType haskell GhcModCheckAndLintAsync
+autocmd FileType haskell nnoremap <Space>ht :GhcModType<CR>
+autocmd FileType haskell nnoremap <Space>hc :GhcModTypeClear<CR>
+autocmd FileType haskell nnoremap <Space>hi :GhcModTypeInsert<CR>
 
 let g:neocomplete#enable_at_startup = 1
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
@@ -280,4 +282,9 @@ let g:syntastic_mode_map = {
     \ "mode": "active",
     \ "active_filetypes": ["haskell"],
     \ "passive_filetypes": [] }
+
+autocmd FileType haskell map <F5> :Unite haskellimport<CR>
+autocmd FileType haskell map <F6> :Hoogle
+autocmd FileType haskell map <C-F6> :HoogleClose<CR>
+autocmd FileType haskell map <S-F6> :HoogleLine<CR>
 
