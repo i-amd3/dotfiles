@@ -276,3 +276,8 @@ autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 autocmd FileType haskell let g:ycm_semantic_triggers = {'haskell' : ['.']}
 autocmd FileType haskell let g:necoghc_enable_detailed_browse = 1
 
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "active_filetypes": ["haskell"],
+    \ "passive_filetypes": [] }
+
