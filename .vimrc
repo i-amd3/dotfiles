@@ -26,8 +26,6 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimshell.vim'
 
-NeoBundle 'thinca/vim-quickrun'
-
 NeoBundle 'dag/vim2hs'
 NeoBundle 'eagletmt/ghcmod-vim'
 NeoBundle 'eagletmt/neco-ghc'
@@ -40,6 +38,7 @@ NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
 
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-commentary'
 
 call neobundle#end()
 
@@ -223,19 +222,6 @@ nnoremap ,gm :Gremove<CR>
 nnoremap ,gd :Gdiff<CR>
 nnoremap ,gc :Gcommit<CR>
 
-command! Hsrun :QuickRun haskell
-let g:quickrun_config = {
-      \ "_" : {
-      \   "runner" : "vimproc",
-      \   "runner/vimproc/updatetime" : 60
-      \ },
-      \}
-let g:quickrun_config.haskell = {
-  \ 'outputter/buffer/split' : ":botright",
-  \ 'outputter/buffer/clise_on_empty' : 1
-  \}
-nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
-
 command! -nargs=? FiveTenets call Fivetenets(<args>)
 nnoremap ,ft :FiveTenets<CR>
 
@@ -260,21 +246,22 @@ augroup END
 inoremap <C-f> <PageDown>
 inoremap <C-b> <PageUp>
 
-nnoremap <F3> :VimFiler<CR>
+nnoremap <F3> :tabe<CR>:VimFiler<CR>
 nnoremap <D-e> :VimFilerExplorer -split -winwidth=30 -toggle -no-quit<CR>
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
 
-nnoremap <F4> :VimShell<CR>
+nnoremap <F4> :tabe<CR>:VimShell<CR>
 nnoremap ,vs :VimShellPop<CR>
 
-autocmd FileType haskell GhcModCheckAndLintAsync
+autocmd BufWritePost *.hs GhcModCheckAndLintAsync
 autocmd FileType haskell nnoremap <Space>ht :GhcModType<CR>
 autocmd FileType haskell nnoremap <Space>hc :GhcModTypeClear<CR>
 autocmd FileType haskell nnoremap <Space>hi :GhcModTypeInsert<CR>
 
 let g:neocomplete#enable_at_startup = 1
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+autocmd FileType haskell let g:syntastic_check_on_open = 1
 autocmd FileType haskell let g:ycm_semantic_triggers = {'haskell' : ['.']}
 autocmd FileType haskell let g:necoghc_enable_detailed_browse = 1
 
