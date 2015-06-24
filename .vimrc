@@ -277,7 +277,7 @@ autocmd FileType haskell nnoremap <C-F6> :HoogleClose<CR>
 autocmd FileType haskell nnoremap <S-F6> :HoogleLine<CR>
 autocmd FileType haskell nnoremap <F7>   :TagbarToggle<CR>
 
-if executable('lushtags')
+function! RunLushtags ()
     let g:tagbar_type_haskell = {
         \ 'ctagsbin' : 'lushtags',
         \ 'ctagsargs' : '--ignore-parse-error --',
@@ -305,5 +305,7 @@ if executable('lushtags')
             \ 'type' : 't'
         \ }
     \ }
-endif
+endfunction
+
+autocmd FileType haskell :call RunLushtags()
 
