@@ -273,8 +273,6 @@ let g:syntastic_mode_map = {
 
 autocmd FileType haskell nnoremap <F5>   :Unite haskellimport<CR>
 autocmd FileType haskell nnoremap <F6>   :Hoogle
-autocmd FileType haskell nnoremap <C-F6> :HoogleClose<CR>
-autocmd FileType haskell nnoremap <S-F6> :HoogleLine<CR>
 autocmd FileType haskell nnoremap <F7>   :TagbarToggle<CR>
 
 function! RunLushtags ()
