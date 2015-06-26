@@ -307,3 +307,5 @@ endfunction
 
 autocmd FileType haskell :call RunLushtags()
 
+nnoremap <Space>w :w<CR>
+
