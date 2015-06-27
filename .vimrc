@@ -49,6 +49,15 @@ filetype plugin indent on
 colorscheme koehler
 syntax on
 
+let $PATH = $PATH . ':' . expand('~/Library/Haskell/bin/')
+let $PATH = $PATH . ':' . expand('~/bin/')
+
+let g:git_diff_normal="git-diff-normal"
+let g:git_diff_normal_opts=["--diff-algorithm=histogram"]
+
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_safe_mode_by_default = 0
+
 set encoding=utf8
 set fileencoding=utf8
 
@@ -65,7 +74,7 @@ set number
 set list
 set wildmenu
 
-set cursorline
+se cursorline
 set cursorcolumn
 set listchars=tab:>.,trail:_,extends:>,precedes:<,nbsp:%
 
@@ -78,15 +87,104 @@ set smarttab
 set clipboard+=unnamed
 set clipboard=unnamed
 
-inoremap { {}<LEFT>
-inoremap [ []<LEFT>
-inoremap ( ()<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-inoremap < <><LEFT>
-
 set guifont=Ricty\ Discord:h16
 set guifontwide=Ricty\ Discord:h16
+
+set laststatus=2
+set statusline=%<%F\ %m%r%h%w\%=%l,%v\ %p%%\ %L\ 
+set statusline+=%{b:charCounterCount}\ 
+set statusline+=%{Date()}
+
+set nobackup
+set noswapfile
+
+nnoremap <Space><Space> v
+
+nnoremap <Space>l $
+nnoremap <Space>h 0
+vnoremap <Space>l $
+vnoremap <Space>h 0
+
+nnoremap <Space>w :w<CR>
+nnoremap <Space>q :q<CR>
+inoremap <Space>w <Esc>:w<CR>i
+inoremap <Space>q <Esc>:q<CR>i
+
+nnoremap <F3> :tabe<CR>:VimFiler<CR>
+nnoremap <D-e> :VimFilerExplorer -split -winwidth=30 -toggle -no-quit<CR>
+
+nnoremap <F4> :tabe<CR>:VimShell<CR>
+nnoremap ,vs :VimShellPop<CR>
+
+nnoremap ,ft :FiveTenets<CR>
+
+nnoremap <Space>gs :Gstatus<CR>
+nnoremap <Space>ga :Gwrite<CR>
+nnoremap <Space>gr :Gread<CR>
+nnoremap <Space>gm :Gremove<CR>
+nnoremap <Space>gd :Gdiff<CR>
+nnoremap <Space>gc :Gcommit<CR>
+
+nnoremap <S-h> <S-i>
+nnoremap <S-l> <S-a>
+vnoremap <S-h> <S-i>
+vnoremap <S-l> <S-a>
+
+nnoremap wj <C-w>j
+nnoremap wk <C-w>k
+nnoremap wh <C-w>h
+nnoremap wl <C-w>l
+
+nnoremap wJ <C-w>J
+nnoremap wK <C-w>K
+nnoremap wH <C-w>H
+nnoremap wL <C-w>L
+
+nnoremap wvs :vs<CR>
+nnoremap wsp :sp<CR>
+nnoremap wvsn :vs enew<CR>
+nnoremap wspn :sp enew<CR>
+
+nnoremap w= <C-w>=
+nnoremap w> <C-w>>
+nnoremap w< <C-w><
+nnoremap w+ <C-w>+
+nnoremap w- <C-w>-
+
+nnoremap <C-l> gt
+nnoremap <C-h> gT
+
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
+nnoremap <silent> <F2> :tabe $MYVIMRC<CR>
+
+inoremap <C-j> <DOWN>
+inoremap <C-k> <UP>
+inoremap <C-h> <LEFT>
+inoremap <C-l> <RIGHT>
+inoremap {<Space> {}<LEFT>
+inoremap [<Space> []<LEFT>
+inoremap (<Space> ()<LEFT>
+inoremap "<Space> ""<LEFT>
+inoremap '<Space> ''<LEFT>
+inoremap <<Space> <><LEFT>
+inoremap <C-f> <PageDown>
+inoremap <C-b> <PageUp>
+
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
+highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
+
+highlight DiffAdd    gui=none guifg=green guibg=darkgreen
+highlight DiffDelete gui=none guifg=green guibg=darkred
+highlight DiffChange gui=none guifg=green guibg=darkblue
+highlight DiffText   gui=none guifg=green guibg=blue
+
+augroup source-vimrc
+  autocmd!
+  autocmd BufWritePost *vimrc source $MYVIMRC | set foldmethod=marker
+  autocmd BufWritePost *gvimrc if has('gui_running') source $MYGVIMRC
+augroup END
 
 autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
 autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
@@ -94,11 +192,6 @@ autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
 function! Date()
   return strftime("%m/%d/%Y %H:%M")
 endfunction
-
-set laststatus=2
-set statusline=%<%F\ %m%r%h%w\%=%l,%v\ %p%%\ %L\ 
-set statusline+=%{b:charCounterCount}\ 
-set statusline+=%{Date()}
 
 function! ZenkakuSpace()
     highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
@@ -131,36 +224,6 @@ function! s:CharCount()
     return l:result
 endfunction
 
-augroup source-vimrc
-  autocmd!
-  autocmd BufWritePost *vimrc source $MYVIMRC | set foldmethod=marker
-  autocmd BufWritePost *gvimrc if has('gui_running') source $MYGVIMRC
-augroup END
-
-nnoremap <CR> a<CR><ESC>
-nnoremap <SPACE> i<SPACE><RIGHT><ESC>
-nnoremap <TAB> i<TAB><RIGHT><ESC>
-inoremap <C-j> <DOWN>
-inoremap <C-k> <UP>
-inoremap <C-h> <LEFT>
-inoremap <C-l> <RIGHT>
-
-nnoremap 0 $
-nnoremap 1 0
-
-highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
-highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
-highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
-
-highlight DiffAdd    gui=none guifg=green guibg=darkgreen
-highlight DiffDelete gui=none guifg=green guibg=darkred
-highlight DiffChange gui=none guifg=green guibg=darkblue
-highlight DiffText   gui=none guifg=green guibg=blue
-
-let g:git_diff_normal="git-diff-normal"
-let g:git_diff_normal_opts=["--diff-algorithm=histogram"]
-
 function! GitDiffNormal()
   let args=[g:git_diff_normal]
   if &diffopt =~ "iwhite"
@@ -180,51 +243,7 @@ if executable(g:git_diff_normal)
   endif
 endif
 
-nnoremap <S-a> <S-i>
-nnoremap <S-i> <S-a>
-
-nnoremap wj <C-w>j
-nnoremap wk <C-w>k
-nnoremap wh <C-w>h
-nnoremap wl <C-w>l
-
-nnoremap wJ <C-w>J
-nnoremap wK <C-w>K
-nnoremap wH <C-w>H
-nnoremap wL <C-w>L
-
-nnoremap wvs :vs<CR>
-nnoremap wsp :sp<CR>
-nnoremap wvsn :vs enew<CR>
-nnoremap wspn :sp enew<CR>
-
-nnoremap w= <C-w>=
-nnoremap w> <C-w>>
-nnoremap w< <C-w><
-nnoremap w+ <C-w>+
-nnoremap w- <C-w>-
-
-nnoremap <C-l> gt
-nnoremap <C-h> gT
-
-nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
-nnoremap <F2> :tabe $MYVIMRC<CR>
-
-set nobackup
-set noswapfile
-
-let $PATH = $PATH . ':' . expand('~/Library/Haskell/bin/')
-let $PATH = $PATH . ':' . expand('~/bin/')
-
-nnoremap ,gs :Gstatus<CR>
-nnoremap ,ga :Gwrite<CR>
-nnoremap ,gr :Gread<CR>
-nnoremap ,gm :Gremove<CR>
-nnoremap ,gd :Gdiff<CR>
-nnoremap ,gc :Gcommit<CR>
-
 command! -nargs=? FiveTenets call Fivetenets(<args>)
-nnoremap ,ft :FiveTenets<CR>
 
 function! Fivetenets(...)
   let ft = ["Give a good greeting!"
@@ -244,16 +263,6 @@ augroup HeroClubMessage
     autocmd BufNewFile * call Fivetenets()
 augroup END
 
-inoremap <C-f> <PageDown>
-inoremap <C-b> <PageUp>
-
-nnoremap <F3> :tabe<CR>:VimFiler<CR>
-nnoremap <D-e> :VimFilerExplorer -split -winwidth=30 -toggle -no-quit<CR>
-let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_safe_mode_by_default = 0
-
-nnoremap <F4> :tabe<CR>:VimShell<CR>
-nnoremap ,vs :VimShellPop<CR>
 
 autocmd BufWritePost *.hs GhcModCheckAndLintAsync
 autocmd FileType haskell nnoremap <Space>ht :GhcModType<CR>
@@ -306,6 +315,4 @@ function! RunLushtags ()
 endfunction
 
 autocmd FileType haskell :call RunLushtags()
-
-nnoremap <Space>w :w<CR>
 
