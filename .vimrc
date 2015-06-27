@@ -53,7 +53,6 @@ call neobundle#end()
 
 filetype plugin indent on
 
-
 colorscheme koehler
 syntax on
 
@@ -120,9 +119,6 @@ set guifont=Ricty\ Discord:h16
 set guifontwide=Ricty\ Discord:h16
 
 set laststatus=2
-"set statusline=%<%F\ %m%r%h%w\%=%l,%v\ %p%%\ %L\ 
-"set statusline+=%{b:charCounterCount}\ 
-"set statusline+=%{Date()}
 
 set nobackup
 set noswapfile
@@ -147,9 +143,9 @@ nnoremap <F3> :tabe<CR>:VimFiler<CR>
 nnoremap <D-e> :VimFilerExplorer -split -winwidth=30 -toggle -no-quit<CR>
 
 nnoremap <F4> :tabe<CR>:VimShell<CR>
-nnoremap ,vs :VimShellPop<CR>
+nnoremap <Space>vs :VimShellPop<CR><Esc><C-w>Ja
 
-nnoremap ,ft :FiveTenets<CR>
+nnoremap <Space>ft :FiveTenets<CR>
 
 nnoremap <Space>gs :Gstatus<CR>
 nnoremap <Space>ga :Gwrite<CR>
@@ -296,7 +292,6 @@ augroup HeroClubMessage
     autocmd!
     autocmd BufNewFile * call Fivetenets()
 augroup END
-
 
 autocmd BufWritePost *.hs GhcModCheckAndLintAsync
 autocmd FileType haskell nnoremap <Space>ht :GhcModType<CR>
