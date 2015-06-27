@@ -43,6 +43,8 @@ NeoBundle 'tyru/open-browser.vim'
 
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-commentary'
+NeoBundle 'tpope/vim-surround'
+
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'haya14busa/incsearch.vim'
