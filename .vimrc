@@ -1,5 +1,9 @@
 if !1 | finish | endif
 
+if !has('gui_running')
+  set t_Co=256
+endif
+
 if has('vim_starting')
   if &compatible
     set nocompatible
@@ -40,6 +44,8 @@ NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-commentary'
 NeoBundle 'majutsushi/tagbar'
+NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'haya14busa/incsearch.vim'
 
 call neobundle#end()
 
@@ -58,6 +64,22 @@ let g:git_diff_normal_opts=["--diff-algorithm=histogram"]
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
 
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#use_vimproc = 1
+
+let g:lightline = {
+      \ 'colorscheme': 'landscape',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&readonly?"x":""}',
+      \ },
+      \ 'separator': {'lef': '', 'right': ''},
+      \ 'subseparator': {'lef': '|', 'right': '|'},
+      \ }
+
 set encoding=utf8
 set fileencoding=utf8
 
@@ -74,7 +96,7 @@ set number
 set list
 set wildmenu
 
-se cursorline
+set cursorline
 set cursorcolumn
 set listchars=tab:>.,trail:_,extends:>,precedes:<,nbsp:%
 
@@ -91,12 +113,16 @@ set guifont=Ricty\ Discord:h16
 set guifontwide=Ricty\ Discord:h16
 
 set laststatus=2
-set statusline=%<%F\ %m%r%h%w\%=%l,%v\ %p%%\ %L\ 
-set statusline+=%{b:charCounterCount}\ 
-set statusline+=%{Date()}
+"set statusline=%<%F\ %m%r%h%w\%=%l,%v\ %p%%\ %L\ 
+"set statusline+=%{b:charCounterCount}\ 
+"set statusline+=%{Date()}
 
 set nobackup
 set noswapfile
+
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 
 nnoremap <Space><Space> v
 
@@ -182,6 +208,7 @@ highlight DiffText   gui=none guifg=green guibg=blue
 
 augroup source-vimrc
   autocmd!
+  autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
   autocmd BufWritePost *vimrc source $MYVIMRC | set foldmethod=marker
   autocmd BufWritePost *gvimrc if has('gui_running') source $MYGVIMRC
 augroup END
@@ -269,7 +296,6 @@ autocmd FileType haskell nnoremap <Space>ht :GhcModType<CR>
 autocmd FileType haskell nnoremap <Space>hc :GhcModTypeClear<CR>
 autocmd FileType haskell nnoremap <Space>hi :GhcModTypeInsert<CR>
 
-let g:neocomplete#enable_at_startup = 1
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 autocmd FileType haskell let g:syntastic_check_on_open = 1
 autocmd FileType haskell let g:ycm_semantic_triggers = {'haskell' : ['.']}
