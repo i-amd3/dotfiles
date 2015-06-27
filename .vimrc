@@ -71,13 +71,18 @@ let g:lightline = {
       \ 'colorscheme': 'landscape',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'filename', 'modified' ] ]
+      \             [ 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'filelen', 'date' ],
+      \              [ 'syntastic', 'lineinfo' ], ['percent'],
+      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
       \ },
       \ 'component': {
+      \   'date': '%{Date()}',
+      \   'filelen': '%{b:charCounterCount}',
       \   'readonly': '%{&readonly?"x":""}',
       \ },
-      \ 'separator': {'lef': '', 'right': ''},
-      \ 'subseparator': {'lef': '|', 'right': '|'},
+      \ 'separator': { 'lef': '', 'right': ''},
+      \ 'subseparator': { 'left': '|', 'right': '|'},
       \ }
 
 set encoding=utf8
