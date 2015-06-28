@@ -1,3 +1,6 @@
+set encoding=utf8
+set fileencoding=utf8
+
 if !1 | finish | endif
 
 if !has('gui_running')
@@ -86,8 +89,8 @@ let g:lightline = {
       \ 'subseparator': { 'left': '|', 'right': '|'},
       \ }
 
-set encoding=utf8
-set fileencoding=utf8
+let g:vimfiler_ignore_pattern = '\%(\.git\|\.DS_Store\)$'
+
 
 set nowrap
 
@@ -199,6 +202,10 @@ inoremap <<Space> <><LEFT>
 inoremap <C-f> <PageDown>
 inoremap <C-b> <PageUp>
 
+" line yank
+" all yank
+" rela
+
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
@@ -209,12 +216,7 @@ highlight DiffDelete gui=none guifg=green guibg=darkred
 highlight DiffChange gui=none guifg=green guibg=darkblue
 highlight DiffText   gui=none guifg=green guibg=blue
 
-augroup source-vimrc
-  autocmd!
-  autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
-  autocmd BufWritePost *vimrc source $MYVIMRC | set foldmethod=marker
-  autocmd BufWritePost *gvimrc if has('gui_running') source $MYGVIMRC
-augroup END
+autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
 
 autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
 autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
@@ -292,55 +294,4 @@ augroup HeroClubMessage
     autocmd!
     autocmd BufNewFile * call Fivetenets()
 augroup END
-
-autocmd BufWritePost *.hs GhcModCheckAndLintAsync
-autocmd FileType haskell nnoremap <Space>ht :GhcModType<CR>
-autocmd FileType haskell nnoremap <Space>hc :GhcModTypeClear<CR>
-autocmd FileType haskell nnoremap <Space>hi :GhcModTypeInsert<CR>
-
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-autocmd FileType haskell let g:syntastic_check_on_open = 1
-autocmd FileType haskell let g:ycm_semantic_triggers = {'haskell' : ['.']}
-autocmd FileType haskell let g:necoghc_enable_detailed_browse = 1
-
-let g:syntastic_mode_map = {
-    \ "mode": "active",
-    \ "active_filetypes": ["haskell"],
-    \ "passive_filetypes": [] }
-
-autocmd FileType haskell nnoremap <F5>   :Unite haskellimport<CR>
-autocmd FileType haskell nnoremap <F6>   :Hoogle
-autocmd FileType haskell nnoremap <F7>   :TagbarToggle<CR>
-
-function! RunLushtags ()
-    let g:tagbar_type_haskell = {
-        \ 'ctagsbin' : 'lushtags',
-        \ 'ctagsargs' : '--ignore-parse-error --',
-        \ 'kinds' : [
-            \ 'm:module:0',
-            \ 'e:exports:1',
-            \ 'i:imports:1',
-            \ 't:declarations:0',
-            \ 'd:declarations:1',
-            \ 'n:declarations:1',
-            \ 'f:functions:0',
-            \ 'c:constructors:0'
-        \ ],
-        \ 'sro' : '.',
-        \ 'kind2scope' : {
-            \ 'd' : 'data',
-            \ 'n' : 'newtype',
-            \ 'c' : 'constructor',
-            \ 't' : 'type'
-        \ },
-        \ 'scope2kind' : {
-            \ 'data' : 'd',
-            \ 'newtype' : 'n',
-            \ 'constructor' : 'c',
-            \ 'type' : 't'
-        \ }
-    \ }
-endfunction
-
-autocmd FileType haskell :call RunLushtags()
 
