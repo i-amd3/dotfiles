@@ -1,5 +1,6 @@
 set encoding=utf8
 set fileencoding=utf8
+filetype off
 
 if !1 | finish | endif
 
@@ -33,13 +34,6 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimshell.vim'
 
-NeoBundle 'dag/vim2hs'
-NeoBundle 'eagletmt/ghcmod-vim'
-NeoBundle 'eagletmt/neco-ghc'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'Twinside/vim-hoogle'
-NeoBundle 'ujihisa/unite-haskellimport'
-
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
@@ -59,7 +53,6 @@ filetype plugin indent on
 colorscheme koehler
 syntax on
 
-let $PATH = $PATH . ':' . expand('~/Library/Haskell/bin/')
 let $PATH = $PATH . ':' . expand('~/bin/')
 
 let g:git_diff_normal="git-diff-normal"
@@ -90,7 +83,6 @@ let g:lightline = {
       \ }
 
 let g:vimfiler_ignore_pattern = '\%(\.git\|\.DS_Store\)$'
-
 
 set nowrap
 
