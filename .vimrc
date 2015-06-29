@@ -81,6 +81,8 @@ let g:lightline = {
 
 let g:vimfiler_ignore_pattern = '\%(\.git\|\.DS_Store\)$'
 
+let g:startify_bookmarks = [ '$MYVIMRC' ]
+
 set nowrap
 
 set hlsearch
