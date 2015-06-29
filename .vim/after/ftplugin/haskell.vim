@@ -1,6 +1,3 @@
-set encoding=utf8
-set fileencoding=utf8
-
 let $PATH = $PATH . ':' . expand('~/Library/Haskell/bin/')
 
 if has('vim_starting')

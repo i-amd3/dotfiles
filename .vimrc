@@ -1,6 +1,5 @@
 set encoding=utf8
 set fileencoding=utf8
-filetype off
 
 if !1 | finish | endif
 
@@ -16,6 +15,7 @@ if has('vim_starting')
   set runtimepath+=~/dotfiles/.vim/bundle/neobundle.vim/
 endif
 
+filetype off
 call neobundle#begin(expand('~/dotfiles/.vim/bundle/'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -34,10 +34,6 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimshell.vim'
 
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'tyru/open-browser.vim'
-
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-commentary'
 NeoBundle 'tpope/vim-surround'
@@ -45,6 +41,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'haya14busa/incsearch.vim'
+NeoBundle 'mhinz/vim-startify'
 
 call neobundle#end()
 
@@ -197,8 +194,6 @@ inoremap <C-b> <PageUp>
 " line yank
 " all yank
 " rela
-
-autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
 
 autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
 autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
