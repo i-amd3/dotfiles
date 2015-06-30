@@ -107,6 +107,8 @@ let g:startify_bookmarks = [
   \ '~/.vim/colors/koehler.vim'
   \ ]
 
+let g:startify_files_number = 5
+
 set nowrap
 
 set hlsearch
