@@ -81,7 +81,24 @@ let g:lightline = {
 
 let g:vimfiler_ignore_pattern = '\%(\.git\|\.DS_Store\)$'
 
-let g:startify_bookmarks = [ '$MYVIMRC' ]
+let g:startify_custom_header = map(split(system('date +"%m/%d/%Y %p %I:%M:%S"'), '\n'), '"   ". v:val') + ['','']
+
+let g:startify_list_order = [
+  \ ['   LRU:'],
+  \ 'files',
+  \ ['   LRU within this dir:'],
+  \ 'dir',
+  \ ['   Sessions:'],
+  \ 'sessions',
+  \ ['   Bookmarks:'],
+  \ 'bookmarks',
+  \ ]
+
+let g:startify_bookmarks = [
+  \ '$MYVIMRC',
+  \ '~/.vim/after/ftplugin/haskell.vim',
+  \ '~/.vim/colors/koehler.vim'
+  \ ]
 
 set nowrap
 
@@ -178,7 +195,8 @@ nnoremap <C-l> gt
 nnoremap <C-h> gT
 
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
-nnoremap <silent> <F2> :tabe $MYVIMRC<CR>
+nnoremap <silent> <F2> :tabe<CR>:Startify<CR>
+" nnoremap <silent> <F2> :tabe $MYVIMRC<CR>
 
 inoremap <C-j> <DOWN>
 inoremap <C-k> <UP>

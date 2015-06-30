@@ -81,3 +81,5 @@ hi DiffDelete gui=none guifg=green guibg=darkred
 hi DiffChange gui=none guifg=green guibg=darkblue
 hi DiffText   gui=none guifg=green guibg=blue
 
+hi StartifyHeader  ctermfg=white
+
