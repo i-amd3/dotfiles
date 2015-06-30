@@ -43,6 +43,13 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'mhinz/vim-startify'
 
+NeoBundle 'dag/vim2hs', {'autoload': {'filetypes': ['haskell']}}
+NeoBundle 'eagletmt/ghcmod-vim', {'autoload': {'filetypes': ['haskell']}}
+NeoBundle 'eagletmt/neco-ghc', {'autoload': {'filetypes': ['haskell']}}
+NeoBundle 'scrooloose/syntastic', {'autoload': {'filetypes': ['haskell']}}
+NeoBundle 'Twinside/vim-hoogle', {'autoload': {'filetypes': ['haskell']}}
+NeoBundle 'ujihisa/unite-haskellimport', {'autoload': {'filetypes': ['haskell']}}
+
 call neobundle#end()
 
 filetype plugin indent on
@@ -151,10 +158,10 @@ inoremap <Space>w <Esc>:w<CR>i
 inoremap <Space>q <Esc>:q<CR>i
 
 nnoremap <F3> :tabe<CR>:VimFiler<CR>
-nnoremap <D-e> :VimFilerExplorer -split -winwidth=30 -toggle -no-quit<CR>
+nnoremap <Space>e :VimFilerExplorer -split -winwidth=30 -toggle -no-quit<CR>
 
 nnoremap <F4> :tabe<CR>:VimShell<CR>
-nnoremap <Space>vs :VimShellPop<CR><Esc><C-w>Ja
+nnoremap <Space>v :VimShellPop<CR><Esc><C-w>Ja
 
 nnoremap <Space>ft :FiveTenets<CR>
 
@@ -196,7 +203,7 @@ nnoremap <C-h> gT
 
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 nnoremap <silent> <F2> :tabe<CR>:Startify<CR>
-" nnoremap <silent> <F2> :tabe $MYVIMRC<CR>
+nnoremap <silent> <Space>r :source $MYVIMRC<CR>
 
 inoremap <C-j> <DOWN>
 inoremap <C-k> <UP>

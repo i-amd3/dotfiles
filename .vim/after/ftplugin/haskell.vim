@@ -1,27 +1,5 @@
 let $PATH = $PATH . ':' . expand('~/Library/Haskell/bin/')
 
-if has('vim_starting')
-  if &compatible
-    set nocompatible
-  endif
-
-  set runtimepath+=~/dotfiles/.vim/bundle/neobundle.vim/
-endif
-
-filetype off
-call neobundle#begin(expand('~/dotfiles/.vim/bundle/'))
-
-NeoBundle 'dag/vim2hs'
-NeoBundle 'eagletmt/ghcmod-vim'
-NeoBundle 'eagletmt/neco-ghc'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'Twinside/vim-hoogle'
-NeoBundle 'ujihisa/unite-haskellimport'
-
-call neobundle#end()
-
-filetype plugin indent on
-
 setlocal omnifunc=necoghc#omnifunc
 
 autocmd BufWritePost *.hs GhcModCheckAndLintAsync
