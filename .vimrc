@@ -205,6 +205,10 @@ nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 nnoremap <silent> <F2> :tabe<CR>:Startify<CR>
 nnoremap <silent> <Space>r :source $MYVIMRC<CR>
 
+nnoremap <silent> <Space>y :%yank<CR>
+nnoremap <silent> <Space>d :%delete<CR>
+nnoremap <silent> <Space>i :set invrelativenumber<CR>
+
 inoremap <C-j> <DOWN>
 inoremap <C-k> <UP>
 inoremap <C-h> <LEFT>
@@ -217,10 +221,6 @@ inoremap '<Space> ''<LEFT>
 inoremap <<Space> <><LEFT>
 inoremap <C-f> <PageDown>
 inoremap <C-b> <PageUp>
-
-" line yank
-" all yank
-" rela
 
 autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
 autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
