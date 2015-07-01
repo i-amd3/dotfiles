@@ -90,6 +90,24 @@ let g:vimfiler_ignore_pattern = '\%(\.git\|\.DS_Store\)$'
 
 let g:startify_custom_header = map(split(system('date +"%m/%d/%Y %p %I:%M:%S"'), '\n'), '"   ". v:val') + ['','']
 
+function! RndAlpha()
+  let xs = []
+  let ax = "abcdefghijklmnopqrstuvwxzy"
+  for i in range(0,strlen(ax)-1)
+    call add(xs, strpart(ax,i,1))
+  endfor
+
+  let yx = []
+  for i in range(0,9)
+    let rnd = system(printf("getRnd %o", len(xs)-1-i))
+    call add(yx, remove(xs, rnd - 1 - i))
+  endfor
+
+  return yx
+endfunction
+
+let g:startify_custom_indices = RndAlpha()
+
 let g:startify_list_order = [
   \ ['   LRU:'],
   \ 'files',
@@ -300,4 +318,5 @@ augroup HeroClubMessage
     autocmd!
     autocmd BufNewFile * call Fivetenets()
 augroup END
+
 
