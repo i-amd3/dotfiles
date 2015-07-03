@@ -92,7 +92,7 @@ let g:startify_custom_header = map(split(system('date +"%m/%d/%Y %p %I:%M:%S"'),
 
 function! RndAlpha()
   let xs = []
-  let ax = "abcdefghijklmnopqrstuvwxzy"
+  let ax = "acdfghlmnoprvwxzy"
   for i in range(0,strlen(ax)-1)
     call add(xs, strpart(ax,i,1))
   endfor
@@ -239,6 +239,12 @@ inoremap (<Space> ()<LEFT>
 inoremap "<Space> ""<LEFT>
 inoremap '<Space> ''<LEFT>
 inoremap <<Space> <><LEFT>
+
+inoremap }} {}<LEFT>
+inoremap ]] []<LEFT>
+inoremap )) ()<LEFT>
+inoremap >> <><LEFT>
+
 inoremap <C-f> <PageDown>
 inoremap <C-b> <PageUp>
 
