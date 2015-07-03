@@ -91,16 +91,16 @@ let g:vimfiler_ignore_pattern = '\%(\.git\|\.DS_Store\)$'
 let g:startify_custom_header = map(split(system('date +"%m/%d/%Y %p %I:%M:%S"'), '\n'), '"   ". v:val') + ['','']
 
 function! RndAlpha()
-  let xs = []
-  let ax = "acdfghlmnoprvwxzy"
-  for i in range(0,strlen(ax)-1)
-    call add(xs, strpart(ax,i,1))
+  let l:xs = []
+  let l:ax = "acdfghlmnoprwxzy"
+  for i in range(0,strlen(l:ax)-1)
+    call add(l:xs, strpart(l:ax,i,1))
   endfor
 
-  let yx = []
+  let l:yx = []
   for i in range(0,9)
-    let rnd = system(printf("getRnd %o", len(xs)-1-i))
-    call add(yx, remove(xs, rnd - 1 - i))
+    let l:rnd = system(printf("getRnd %o", len(l:xs)-1-i))
+    call add(l:yx, remove(l:xs, l:rnd - 1 - i))
   endfor
 
   return yx
