@@ -100,7 +100,10 @@ function! RndAlpha()
   let l:yx = []
   for i in range(0,9)
     let l:rnd = system(printf("getRnd %o", len(l:xs)-1-i))
-    call add(l:yx, remove(l:xs, l:rnd - 1 - i))
+    if l:rnd >= len(l:xs)
+      let l:rnd = 0
+    endif
+    call add(l:yx, remove(l:xs, l:rnd))
   endfor
 
   return yx
@@ -129,7 +132,6 @@ let g:startify_files_number = 5
 
 set nowrap
 
-set hlsearch
 set ignorecase
 set smartcase
 
@@ -151,7 +153,6 @@ set tabstop=2
 set smarttab
 
 set clipboard+=unnamed
-set clipboard=unnamed
 
 set guifont=Ricty\ Discord:h16
 set guifontwide=Ricty\ Discord:h16
@@ -160,6 +161,8 @@ set laststatus=2
 
 set nobackup
 set noswapfile
+
+set viminfo+=h
 
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -197,6 +200,10 @@ nnoremap <S-l> <S-a>
 vnoremap <S-h> <S-i>
 vnoremap <S-l> <S-a>
 
+nnoremap w <Nop>
+nnoremap W <Nop>
+nnoremap <S-w> <Nop>
+
 nnoremap wj <C-w>j
 nnoremap wk <C-w>k
 nnoremap wh <C-w>h
@@ -212,11 +219,11 @@ nnoremap wsp :sp<CR>
 nnoremap wvsn :vs enew<CR>
 nnoremap wspn :sp enew<CR>
 
-nnoremap w= <C-w>=
-nnoremap w> <C-w>>
-nnoremap w< <C-w><
-nnoremap w+ <C-w>+
-nnoremap w- <C-w>-
+nnoremap <S-w>- <C-w>=
+nnoremap <S-w>. <C-w>>
+nnoremap <S-w>, <C-w><
+nnoremap <S-w>; <C-w>+
+nnoremap <S-w>: <C-w>-
 
 nnoremap <C-l> gt
 nnoremap <C-h> gT
