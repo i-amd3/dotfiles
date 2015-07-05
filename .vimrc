@@ -219,11 +219,11 @@ nnoremap wsp :sp<CR>
 nnoremap wvsn :vs enew<CR>
 nnoremap wspn :sp enew<CR>
 
-nnoremap <S-w>- <C-w>=
-nnoremap <S-w>. <C-w>>
-nnoremap <S-w>, <C-w><
-nnoremap <S-w>; <C-w>+
-nnoremap <S-w>: <C-w>-
+nnoremap W- <C-w>=
+nnoremap W. <C-w>>
+nnoremap W, <C-w><
+nnoremap W; <C-w>+
+nnoremap W: <C-w>-
 
 nnoremap <C-l> gt
 nnoremap <C-h> gT
