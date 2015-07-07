@@ -57,6 +57,8 @@ filetype plugin indent on
 colorscheme koehler
 syntax on
 
+:cd %:h
+
 let $PATH = $PATH . ':' . expand('~/bin/')
 
 let g:git_diff_normal="git-diff-normal"
@@ -254,6 +256,8 @@ inoremap >> <><LEFT>
 
 inoremap <C-f> <PageDown>
 inoremap <C-b> <PageUp>
+
+nnoremap <Space>f yiw:grep -r<Space><C-r>"<Space>
 
 autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
 autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
