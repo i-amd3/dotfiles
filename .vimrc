@@ -257,6 +257,7 @@ inoremap <C-b> <PageUp>
 
 autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
 autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
+autocmd QuickFixCmdPost *grep* cwindow
 
 function! Date()
   return strftime("%m/%d/%Y %H:%M")
