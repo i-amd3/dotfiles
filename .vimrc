@@ -258,7 +258,6 @@ inoremap <C-f> <PageDown>
 inoremap <C-b> <PageUp>
 
 nnoremap <Space>f :grep -r<Space><C-r><C-w><Space><C-r>=getcwd()<CR>/
-cmap a <C-\>
 
 autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
 autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
