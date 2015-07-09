@@ -210,21 +210,21 @@ nnoremap wk <C-w>k
 nnoremap wh <C-w>h
 nnoremap wl <C-w>l
 
-nnoremap wJ <C-w>J
-nnoremap wK <C-w>K
-nnoremap wH <C-w>H
-nnoremap wL <C-w>L
+nnoremap WJ <C-w>J
+nnoremap WK <C-w>K
+nnoremap WH <C-w>H
+nnoremap WL <C-w>L
 
 nnoremap wvs :vs<CR>
 nnoremap wsp :sp<CR>
 nnoremap wvsn :vs enew<CR>
 nnoremap wspn :sp enew<CR>
 
-nnoremap W- <C-w>=
-nnoremap W. <C-w>>
-nnoremap W, <C-w><
-nnoremap W; <C-w>+
-nnoremap W: <C-w>-
+nnoremap w- <C-w>=
+nnoremap w. <C-w>>
+nnoremap w, <C-w><
+nnoremap w; <C-w>+
+nnoremap w: <C-w>-
 
 nnoremap <C-l> gt
 nnoremap <C-h> gT
@@ -335,5 +335,4 @@ augroup HeroClubMessage
     autocmd!
     autocmd BufNewFile * call Fivetenets()
 augroup END
-
 
