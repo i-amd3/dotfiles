@@ -257,7 +257,9 @@ inoremap >> <><LEFT>
 inoremap <C-f> <PageDown>
 inoremap <C-b> <PageUp>
 
-nnoremap <Space>f :grep -r<Space><C-r><C-w><Space><C-r>=getcwd()<CR>/
+nnoremap <Space>ff :grep -r<Space><C-r><C-w><Space><C-r>=getcwd()<CR>/
+" cnoremap <Space>f :grep -r<Space><C-r><C-a><Space><C-r>=getcwd()<CR>/
+autocmd TabEnter,WinEnter,BufRead * execute ":lcd %:h"
 
 autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
 autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
