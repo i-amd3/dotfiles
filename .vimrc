@@ -203,7 +203,8 @@ vnoremap <S-l> <S-a>
 
 nnoremap w <Nop>
 nnoremap W <Nop>
-nnoremap <S-w> <Nop>
+vnoremap w <Nop>
+vnoremap W <Nop>
 
 nnoremap wj <C-w>j
 nnoremap wk <C-w>k
@@ -220,11 +221,11 @@ nnoremap wsp :sp<CR>
 nnoremap wvsn :vs enew<CR>
 nnoremap wspn :sp enew<CR>
 
-nnoremap w- <C-w>=
+nnoremap ww <C-w>=
 nnoremap w. <C-w>>
 nnoremap w, <C-w><
 nnoremap w; <C-w>+
-nnoremap w: <C-w>-
+nnoremap w- <C-w>-
 
 nnoremap <C-l> gt
 nnoremap <C-h> gT
