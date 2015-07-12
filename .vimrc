@@ -242,12 +242,12 @@ inoremap <C-j> <DOWN>
 inoremap <C-k> <UP>
 inoremap <C-h> <LEFT>
 inoremap <C-l> <RIGHT>
-inoremap {<Space> {}<LEFT>
-inoremap [<Space> []<LEFT>
-inoremap (<Space> ()<LEFT>
-inoremap "<Space> ""<LEFT>
-inoremap '<Space> ''<LEFT>
-inoremap <<Space> <><LEFT>
+inoremap {{ {}<LEFT>
+inoremap [[ []<LEFT>
+inoremap (( ()<LEFT>
+inoremap "" ""<LEFT>
+inoremap '' ''<LEFT>
+inoremap << <><LEFT>
 
 inoremap }} {}<LEFT>
 inoremap ]] []<LEFT>
