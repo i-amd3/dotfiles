@@ -2,6 +2,7 @@ set encoding=utf8
 set fileencoding=utf8
 
 if !1 | finish | endif
+192.168.0.1
 
 if !has('gui_running')
   set t_Co=256
@@ -33,6 +34,10 @@ NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimshell.vim'
+
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'honza/vim-snippets'
 
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-commentary'
@@ -89,6 +94,24 @@ let g:lightline = {
 let g:vimfiler_ignore_pattern = '\%(\.git\|\.DS_Store\)$'
 
 let g:startify_custom_header = map(split(system('date +"%m/%d/%Y %p %I:%M:%S"'), '\n'), '"   ". v:val') + ['','']
+
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippets#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
 function! RndAlpha()
   let l:xs = []
@@ -234,8 +257,10 @@ nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 nnoremap <silent> <F2> :tabe<CR>:Startify<CR>
 nnoremap <silent> <Space>r :source $MYVIMRC<CR>
 
-nnoremap <silent> <Space>y :%yank<CR>
-nnoremap <silent> <Space>d :%delete<CR>
+nnoremap <silent> <Space>ay :%yank<CR>
+nnoremap <silent> <Space>ad :%delete<CR>
+nnoremap <silent> <Space>y yiw
+nnoremap <silent> <Space>d diw
 nnoremap <silent> <Space>i :set invrelativenumber<CR>
 
 inoremap <C-j> <DOWN>
@@ -257,7 +282,7 @@ inoremap >> <><LEFT>
 inoremap <C-f> <PageDown>
 inoremap <C-b> <PageUp>
 
-nnoremap <Space>f :grep -r<Space>"<C-r><C-w>"<Space><C-r>=getcwd()<CR>/
+nnoremap <Space>f :vim<Space>"<C-r><C-w>"<Space><C-r>=getcwd()<CR>/**
 
 autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
 autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell

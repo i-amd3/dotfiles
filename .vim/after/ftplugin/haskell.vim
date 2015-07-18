@@ -42,6 +42,7 @@ let g:tagbar_type_haskell = {
     \ }
 \ }
 
+
 nnoremap <buffer> <F5>   :Unite haskellimport<CR>
 nnoremap <buffer> <F6>   :Hoogle
 nnoremap <buffer> <F7>   :TagbarToggle<CR>
