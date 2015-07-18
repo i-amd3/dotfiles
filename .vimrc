@@ -2,7 +2,6 @@ set encoding=utf8
 set fileencoding=utf8
 
 if !1 | finish | endif
-192.168.0.1
 
 if !has('gui_running')
   set t_Co=256
