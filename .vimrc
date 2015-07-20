@@ -54,6 +54,8 @@ NeoBundle 'scrooloose/syntastic', {'autoload': {'filetypes': ['haskell']}}
 NeoBundle 'Twinside/vim-hoogle', {'autoload': {'filetypes': ['haskell']}}
 NeoBundle 'ujihisa/unite-haskellimport', {'autoload': {'filetypes': ['haskell']}}
 
+NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+
 call neobundle#end()
 
 filetype plugin indent on
