@@ -47,12 +47,12 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'mhinz/vim-startify'
 
-NeoBundle 'dag/vim2hs', {'autoload': {'filetypes': ['haskell']}}
-NeoBundle 'eagletmt/ghcmod-vim', {'autoload': {'filetypes': ['haskell']}}
-NeoBundle 'eagletmt/neco-ghc', {'autoload': {'filetypes': ['haskell']}}
-NeoBundle 'scrooloose/syntastic', {'autoload': {'filetypes': ['haskell']}}
-NeoBundle 'Twinside/vim-hoogle', {'autoload': {'filetypes': ['haskell']}}
-NeoBundle 'ujihisa/unite-haskellimport', {'autoload': {'filetypes': ['haskell']}}
+NeoBundleLazy 'dag/vim2hs', {'autoload': {'filetypes': ['haskell']}}
+NeoBundleLazy 'eagletmt/ghcmod-vim', {'autoload': {'filetypes': ['haskell']}}
+NeoBundleLazy 'eagletmt/neco-ghc', {'autoload': {'filetypes': ['haskell']}}
+NeoBundleLazy 'scrooloose/syntastic', {'autoload': {'filetypes': ['haskell']}}
+NeoBundleLazy 'Twinside/vim-hoogle', {'autoload': {'filetypes': ['haskell']}}
+NeoBundleLazy 'ujihisa/unite-haskellimport', {'autoload': {'filetypes': ['haskell']}}
 
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 
