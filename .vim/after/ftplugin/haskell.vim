@@ -4,15 +4,8 @@ setlocal omnifunc=necoghc#omnifunc
 
 autocmd BufWritePost *.hs GhcModCheckAndLintAsync
 
-let g:syntastic_check_on_open = 1
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
 let g:necoghc_enable_detailed_browse = 1
-
-let g:syntastic_mode_map = {
-    \ "mode": "active",
-    \ "active_filetypes": ["haskell"],
-    \ "passive_filetypes": [] }
-
 
 let g:tagbar_type_haskell = {
     \ 'ctagsbin' : 'lushtags',

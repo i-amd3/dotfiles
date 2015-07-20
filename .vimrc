@@ -55,6 +55,7 @@ NeoBundleLazy 'Twinside/vim-hoogle', {'autoload': {'filetypes': ['haskell']}}
 NeoBundleLazy 'ujihisa/unite-haskellimport', {'autoload': {'filetypes': ['haskell']}}
 
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+NeoBundleLazy 'marijnh/tern_for_vim', {'autoload':{'filetypes':['javascript']}, 'build':{'others':['npm install']}}
 
 call neobundle#end()
 
@@ -153,6 +154,12 @@ let g:startify_bookmarks = [
   \ ]
 
 let g:startify_files_number = 5
+
+let g:syntastic_check_on_open = 1
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "active_filetypes": ["haskell","javascript"],
+    \ "passive_filetypes": [] }
 
 set nowrap
 
