@@ -55,7 +55,6 @@ NeoBundleLazy 'Twinside/vim-hoogle', {'autoload': {'filetypes': ['haskell']}}
 NeoBundleLazy 'ujihisa/unite-haskellimport', {'autoload': {'filetypes': ['haskell']}}
 
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-NeoBundleLazy 'marijnh/tern_for_vim', {'autoload':{'filetypes':['javascript']}, 'build':{'others':['npm install']}}
 
 call neobundle#end()
 

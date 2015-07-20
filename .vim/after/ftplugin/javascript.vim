@@ -1,2 +1,1 @@
-setlocal omnifunc=tern#Complete
 
