@@ -150,6 +150,7 @@ let g:startify_list_order = [
 let g:startify_bookmarks = [
   \ '$MYVIMRC',
   \ '~/.vim/after/ftplugin/haskell.vim',
+  \ '~/.vim/after/ftplugin/javascript.vim',
   \ '~/.vim/colors/koehler.vim'
   \ ]
 
