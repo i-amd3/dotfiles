@@ -79,7 +79,7 @@ let g:lightline = {
       \ 'colorscheme': 'landscape',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'filename', 'modified' ] ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
       \   'right': [ [ 'filelen', 'date' ],
       \              [ 'syntastic', 'lineinfo' ], ['percent'],
       \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
@@ -88,6 +88,7 @@ let g:lightline = {
       \   'date': '%{Date()}',
       \   'filelen': '%{b:charCounterCount}',
       \   'readonly': '%{&readonly?"x":""}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
       \ },
       \ 'separator': { 'lef': '', 'right': ''},
       \ 'subseparator': { 'left': '|', 'right': '|'},
