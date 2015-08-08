@@ -55,6 +55,7 @@ NeoBundleLazy 'Twinside/vim-hoogle', {'autoload': {'filetypes': ['haskell']}}
 NeoBundleLazy 'ujihisa/unite-haskellimport', {'autoload': {'filetypes': ['haskell']}}
 
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+NeoBundle 'marijnh/tern_for_vim', {'build':{'others':['npm install']}}
 
 call neobundle#end()
 
@@ -148,6 +149,7 @@ let g:startify_list_order = [
 
 let g:startify_bookmarks = [
   \ '$MYVIMRC',
+  \ '~/.zshrc',
   \ '~/.vim/after/ftplugin/haskell.vim',
   \ '~/.vim/after/ftplugin/javascript.vim',
   \ '~/.vim/colors/koehler.vim'
