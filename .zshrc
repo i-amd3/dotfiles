@@ -61,6 +61,9 @@ setopt pushd_ignore_dups
 # beepを無効
 setopt no_beep
 
+# 履歴に重複したコマンドがある場合は古い方を削除
+setopt hist_save_nodups
+
 # 同じコマンドを履歴に保存しない
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
