@@ -41,6 +41,7 @@ NeoBundle 'honza/vim-snippets'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-commentary'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-git'
 
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'itchyny/lightline.vim'
@@ -53,9 +54,6 @@ NeoBundleLazy 'eagletmt/neco-ghc', {'autoload': {'filetypes': ['haskell']}}
 NeoBundleLazy 'scrooloose/syntastic', {'autoload': {'filetypes': ['haskell']}}
 NeoBundleLazy 'Twinside/vim-hoogle', {'autoload': {'filetypes': ['haskell']}}
 NeoBundleLazy 'ujihisa/unite-haskellimport', {'autoload': {'filetypes': ['haskell']}}
-
-NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-NeoBundle 'marijnh/tern_for_vim', {'build':{'others':['npm install']}}
 
 call neobundle#end()
 
@@ -223,12 +221,14 @@ nnoremap <Space>v :VimShellPop<CR><Esc><C-w>Ja
 
 nnoremap <Space>ft :FiveTenets<CR>
 
-nnoremap <Space>gs :Gstatus<CR>
 nnoremap <Space>ga :Gwrite<CR>
 nnoremap <Space>gr :Gread<CR>
-nnoremap <Space>gm :Gremove<CR>
-nnoremap <Space>gd :Gdiff<CR>
+nnoremap <Space>gs :Gstatus<CR>
 nnoremap <Space>gc :Gcommit<CR>
+nnoremap <Space>gl :Glog<CR>
+nnoremap <Space>gd :Gdiff<CR>
+nnoremap <Space>gb :Gblame<CR>
+nnoremap <Space>gm :Gremove<CR>
 
 nnoremap <S-h> <S-i>
 nnoremap <S-l> <S-a>
