@@ -77,8 +77,6 @@ setopt hist_reduce_blanks
 # vimで新規ファイルを開くときタブで開く
 alias mvim='mvim --remote-tab-silent'
 
-alias reload='source ~/.zsh'
-
 alias la='ls -a'
 alias ll='ls -l'
 
