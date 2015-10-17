@@ -11,12 +11,13 @@ export PATH=/usr/local/share/python:$PATH
 export PATH=~/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 
+
 # oh-my-zsh 初期設定
 export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME='agnoster'
 
-plugins=(git git-flow-completion)
+plugins=(git git-flow-completion stack cabal brew vagrant)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -77,11 +78,18 @@ setopt hist_reduce_blanks
 # vimで新規ファイルを開くときタブで開く
 alias mvim='mvim --remote-tab-silent'
 
+# alias設定
+if [ -x "`which peco`" ]; then
+  alias tp='top | peco'
+  alias pp='ps aux | peco'
+fi
+
 alias la='ls -a'
 alias ll='ls -l'
+alias lla='ls -la'
 
 alias rm='rm -i'
-alias cp='cp -i'
+alias cp='cp'
 alias mv='mv -i'
 
 alias mkdir='mkdir -p'
@@ -90,6 +98,28 @@ alias sudo='sudo '
 
 alias -g L='| less'
 alias -g G='| grep'
+alias -g P='| peco'
 
+# 再読み込み
 alias reload='source ~/.zshrc'
+
+# Haskell
+alias ghc='stack ghc'
+alias ghci='stack ghci'
+alias runghc='stack runghc'
+
+# peco設定
+function peco_select_history() {
+  local tac
+  if which tac > /dev/null; then
+    tac="tac"
+  else
+    tac="tail -r"
+  fi
+  BUFFER=$(fc -l -n 1 | eval $tac | awk '!a[$0]++' | peco --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle -R -c
+}
+zle -N peco_select_history
+bindkey '^R' peco_select_history
 
