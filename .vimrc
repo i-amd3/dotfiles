@@ -56,6 +56,8 @@ NeoBundleLazy 'scrooloose/syntastic', {'autoload': {'filetypes': ['haskell']}}
 NeoBundleLazy 'Twinside/vim-hoogle', {'autoload': {'filetypes': ['haskell']}}
 NeoBundleLazy 'ujihisa/unite-haskellimport', {'autoload': {'filetypes': ['haskell']}}
 
+NeoBundle 'subebe/audio-junkie.vim'
+
 call neobundle#end()
 
 filetype plugin indent on
