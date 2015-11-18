@@ -49,6 +49,10 @@ NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'mhinz/vim-startify'
 NeoBundle 'idanarye/vim-merginal'
 NeoBundle 'rhysd/clever-f.vim'
+NeoBundle 'yuratomo/w3m.vim'
+
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
 
 NeoBundleLazy 'dag/vim2hs', {'autoload': {'filetypes': ['haskell']}}
 NeoBundleLazy 'eagletmt/ghcmod-vim', {'autoload': {'filetypes': ['haskell']}}
@@ -99,6 +103,8 @@ let g:lightline = {
 let g:vimfiler_ignore_pattern = '\%(\.git\|\.DS_Store\)$'
 
 let g:startify_custom_header = map(split(system('date +"%m/%d/%Y %p %I:%M:%S"'), '\n'), '"   ". v:val') + ['','']
+
+let g:w3m#command = '/usr/local/Cellar/w3m/0.5.3/bin/w3m'
 
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
