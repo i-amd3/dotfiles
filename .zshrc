@@ -108,6 +108,10 @@ alias ghc='stack ghc'
 alias ghci='stack ghci'
 alias runghc='stack runghc'
 
+# Frege
+alias fregec='java -Xss1m -jar $HOME/bin/fregec.jar -d build'
+alias frege='java -cp build:$HOME/bin/fregec.jar'
+
 # peco設定
 function peco_select_history() {
   local tac
