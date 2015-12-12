@@ -1,4 +1,5 @@
 .vim/autoload/*
 .vim/bundle/*
 .vim/plugin/*
+.oh-my-zsh/*
 
