@@ -48,3 +48,6 @@ nnoremap <buffer> <Space>ht :GhcModType<CR>
 nnoremap <buffer> <Space>hc :GhcModTypeClear<CR>
 nnoremap <buffer> <Space>hi :GhcModTypeInsert<CR>
 
+let g:haskell_conceal              = 0
+let g:haskell_conceal_enumerations = 0
+

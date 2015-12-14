@@ -24,21 +24,25 @@ brew install git-flow
 brew install haskell-stack
 brew install httpie
 brew install jq
+brew install p7zip
 brew install peco
 brew install tree
 brew install vim
 brew install wget
 brew install zsh
+brew cleanup
 
 # Cask Install
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 brew install brew-cask
+brew install caskroom/cask/brew-cask
 brew cask install google-chrome
 brew cask install google-japanese-ime
 brew cask install iterm2
 brew cask install virtualbox
 brew cask install vagrant
 brew cask install vagrant-manager
+brew cask cleanup
 
 # NeoBundle
 mkdir -p $HOME

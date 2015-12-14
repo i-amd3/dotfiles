@@ -48,6 +48,7 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'mhinz/vim-startify'
 NeoBundle 'idanarye/vim-merginal'
+NeoBundle 'rhysd/clever-f.vim'
 
 NeoBundleLazy 'dag/vim2hs', {'autoload': {'filetypes': ['haskell']}}
 NeoBundleLazy 'eagletmt/ghcmod-vim', {'autoload': {'filetypes': ['haskell']}}
