@@ -16,7 +16,7 @@ brew update
 brew upgrade
 
 # Install
-brew install vim
+brew install vim --with-lua
 brew install macvim --with-lua
 brew linkapps
 brew install ctags
@@ -33,7 +33,6 @@ brew install zsh
 brew cleanup
 
 # Cask Install
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 brew install brew-cask
 brew install caskroom/cask/brew-cask
 brew cask install google-chrome

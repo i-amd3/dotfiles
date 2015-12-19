@@ -11,8 +11,6 @@ export PATH=/usr/local/share/python:$PATH
 export PATH=~/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
 # oh-my-zsh 初期設定
 export ZSH=$HOME/dotfiles/.oh-my-zsh
 
