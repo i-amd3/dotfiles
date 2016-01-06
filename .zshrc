@@ -10,6 +10,7 @@ export PATH=~/Library/Haskell/bin:$PATH
 export PATH=/usr/local/share/python:$PATH
 export PATH=~/bin:$PATH
 export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
 
 # oh-my-zsh 初期設定
 export ZSH=$HOME/dotfiles/.oh-my-zsh

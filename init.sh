@@ -21,6 +21,7 @@ brew install macvim --with-lua
 brew linkapps
 brew install ctags
 brew install git-flow
+brew install gnu-tar
 brew install haskell-stack
 brew install httpie
 brew install jq
