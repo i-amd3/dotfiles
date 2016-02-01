@@ -51,6 +51,9 @@ NeoBundle 'idanarye/vim-merginal'
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'yuratomo/w3m.vim'
 
+NeoBundle 'subebe/audio-junkie.vim'
+NeoBundle 'koron/codic-vim'
+
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
 
@@ -61,7 +64,6 @@ NeoBundleLazy 'scrooloose/syntastic', {'autoload': {'filetypes': ['haskell']}}
 NeoBundleLazy 'Twinside/vim-hoogle', {'autoload': {'filetypes': ['haskell']}}
 NeoBundleLazy 'ujihisa/unite-haskellimport', {'autoload': {'filetypes': ['haskell']}}
 
-NeoBundle 'subebe/audio-junkie.vim'
 
 call neobundle#end()
 
@@ -307,6 +309,8 @@ inoremap <C-b> <PageUp>
 
 nnoremap <Space>f :vim<Space>"<C-r><C-w>"<Space><C-r>=getcwd()<CR>/**
 
+nnoremap <Space>c :Codic<Space>
+
 autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
 autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
 autocmd QuickFixCmdPost *grep* cwindow
@@ -384,4 +388,35 @@ augroup HeroClubMessage
     autocmd!
     autocmd BufNewFile * call Fivetenets()
 augroup END
+
+inoremap <silent> <C-c>  <C-R>=<SID>codic_complete()<CR>
+function! s:codic_complete()
+  let line = getline('.')
+  let start = match(line, '\k\+$')
+  let cand = s:codic_candidates(line[start :])
+  call complete(start +1, cand)
+  return ''
+endfunction
+function! s:codic_candidates(arglead)
+  let cand = codic#search(a:arglead, 30)
+  " error
+  if type(cand) == type(0)
+    return []
+  endif
+  " english -> english terms
+  if a:arglead =~# '^\w\+$'
+    return map(cand, '{"word": v:val["label"], "menu": join(map(copy(v:val["values"]), "v:val.word"), ",")}')
+  endif
+  " japanese -> english terms
+  return s:reverse_candidates(cand)
+endfunction
+function! s:reverse_candidates(cand)
+  let _ = []
+  for c in a:cand
+    for v in c.values
+      call add(_, {"word": v.word, "menu": !empty(v.desc) ? v.desc : c.label })
+    endfor
+  endfor
+  return _
+endfunction
 
