@@ -311,6 +311,9 @@ nnoremap <Space>f :vim<Space>"<C-r><C-w>"<Space><C-r>=getcwd()<CR>/**
 
 nnoremap <Space>c :Codic<Space>
 
+nnoremap bn :bnext<CR>
+nnoremap bp :bprevious<CR>
+
 autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
 autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
 autocmd QuickFixCmdPost *grep* cwindow
