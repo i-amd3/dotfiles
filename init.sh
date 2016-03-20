@@ -25,6 +25,7 @@ brew install gnu-tar
 brew install haskell-stack
 brew install httpie
 brew install jq
+brew install jo
 brew install p7zip
 brew install peco
 brew install tree
@@ -45,7 +46,7 @@ brew cask install vagrant-manager
 brew cask cleanup
 
 # NeoBundle
-mkdir -p $HOME
+mkdir -p $HOME/.vim/bundle/
 git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
 $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
 
