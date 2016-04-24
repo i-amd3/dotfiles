@@ -4,22 +4,18 @@ export LANG=ja_JP.UTF-8
 export TERM=xterm-256color
 
 export PGDATA=/usr/local/var/postgres
-export PATH=~/.cabal/bin:$PATH
-export PATH=~/.local/bin:$PATH
-export PATH=~/Library/Haskell/bin:$PATH
+export PATH=$HOME/.cabal/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 export PATH=/usr/local/share/python:$PATH
-export PATH=~/bin:$PATH
+export PATH=$HOME/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
 
-# oh-my-zsh 初期設定
-export ZSH=$HOME/dotfiles/.oh-my-zsh
+export XDG_CONFIG_HOME=$HOME/dotfiles:$XDG_CONFIG_HOME
 
-ZSH_THEME='agnoster'
+# zplug 初期設定(予定)
 
-plugins=(git git-flow-completion stack cabal brew vagrant)
-
-source $ZSH/oh-my-zsh.sh
+# plugins=(git git-flow-completion stack cabal brew vagrant)
 
 # viライクな操作
 bindkey -v
@@ -76,7 +72,8 @@ setopt hist_ignore_space
 setopt hist_reduce_blanks
 
 # vimで新規ファイルを開くときタブで開く
-alias mvim='mvim --remote-tab-silent'
+alias vim='nvim'
+# alias mvim='mvim --remote-tab-silent'
 
 # alias設定
 if [ -x "`which peco`" ]; then
@@ -107,10 +104,6 @@ alias reload='source ~/.zshrc'
 alias ghc='stack ghc'
 alias ghci='stack ghci'
 alias runghc='stack runghc'
-
-# Frege
-alias fregec='java -Xss1m -jar $HOME/bin/fregec.jar -d build'
-alias frege='java -cp build:$HOME/bin/fregec.jar'
 
 # peco設定
 function peco_select_history() {
