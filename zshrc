@@ -14,6 +14,7 @@ export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
 export XDG_CONFIG_HOME=$HOME/dotfiles:$XDG_CONFIG_HOME
 
 # zplug 初期設定(予定)
+source $HOME/.zplug/zplug
 
 # plugins=(git git-flow-completion stack cabal brew vagrant)
 

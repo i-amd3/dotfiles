@@ -1,12 +1,13 @@
 #!/bin/sh
+export XDG_CONFIG_HOME = $XDG_CONFIG_HOME:$HOME/dotfiles
 
 # Get dotfiles
 git clone https://github.com/i-amd3/dotfiles $HOME/dotfiles
 
 # Create symbolic link
-ln -sf $HOME/.vim   $XDG_CONFIG_HOME/nvim
-ln -sf $HOME/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
-ln -sf $HOME/.zshrc $XDG_CONFIG_HOME/zshrc
+ln -sf $XDG_CONFIG_HOME/nvim          $HOME/.vim
+ln -sf $XDG_CONFIG_HOME/nvim/init.vim $HOME/.vimrc
+ln -sf $XDG_CONFIG_HOME/zshrc         $HOME/.zshrc
 
 # Install homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -19,7 +20,11 @@ brew upgrade
 brew install vim --with-lua
 brew install macvim --with-lua
 brew install neovim/neovim/neovim
+brew install python
+brew install python3
 brew linkapps
+# brew linkapps python
+# brew linkapps python3
 brew install ctags
 brew install git-flow
 brew install gnu-tar
@@ -46,9 +51,22 @@ brew cask install vagrant
 brew cask install vagrant-manager
 brew cask cleanup
 
+# uprade pip
+# pip install --upgrade pip setuptools
+# pip3 install --upgrade pip setuptools
+
+# install python plugin for neovim
+pip install --user neovim
+pip3 install --user neovim
+
 # vim-plug
+curl -fLo $XDG_CONFIG_HOME/nvim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # zplug
+mkdir -p $XDG_CONFIG_HOME/etc
+git clone https://github.com/b4b4r07/zplug $XDG_CONFIG_HOME/etc/zplug
+ln -sf $XDG_CONFIG_HOME/etc/zplug $HOME/.zplug
 
 # Haskell Library
 stack update
