@@ -128,8 +128,8 @@ brew cask cleanup
 echo "8. Setting pip"
 pip install --upgrade pip setuptools
 pip3 install --upgrade pip setuptools
-pip install --user neovim
-pip3 install --user neovim
+pip install neovim
+pip3 install neovim
 
 # install vim-plug
 echo "9. install vim-plug"

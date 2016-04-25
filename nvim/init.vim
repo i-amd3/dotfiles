@@ -13,10 +13,10 @@ plug 'rhysd/clever-f.vim'
 call plug#end()
 
 "Python support
-let g:python_host_prog = '/usr/local/bin'
+"let g:python_host_prog = '/usr/local/bin'
 
 "Python3 support
-let g:python3_host_prog = '/usr/local/bin'
+"let g:python3_host_prog = '/usr/local/bin'
 
 filetype plugin indent on
 
