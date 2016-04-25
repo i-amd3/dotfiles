@@ -9,17 +9,26 @@ if !has('gui_running')
 endif
 
 call plug#begin('~/.vim/plugged')
-plug 'rhysd/clever-f.vim'
+
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+
+Plug 'rhysd/clever-f.vim'
 call plug#end()
+
+filetype plugin indent on
+
+colorscheme koehler
+syntax on
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 
 "Python support
 "let g:python_host_prog = '/usr/local/bin'
 
 "Python3 support
 "let g:python3_host_prog = '/usr/local/bin'
-
-filetype plugin indent on
-
-colorscheme koehler
-syntax on
 
