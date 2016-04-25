@@ -169,7 +169,7 @@ if test $(which stack); then
     hlint
     happy
     shelly
-    lush
+    turtle
     hawk
     hasktags
     lushtags
