@@ -1,5 +1,6 @@
 #
 # 環境設定
+export EDITOR=vim
 export LANG=ja_JP.UTF-8
 export TERM=xterm-256color
 
@@ -11,12 +12,29 @@ export PATH=$HOME/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
 
-export XDG_CONFIG_HOME=$HOME/dotfiles:$XDG_CONFIG_HOME
+export XDG_CONFIG_HOME=$HOME/dotfiles
 
 # zplug 初期設定(予定)
 source $HOME/.zplug/zplug
 
-# plugins=(git git-flow-completion stack cabal brew vagrant)
+# zshプラグイン
+zplug "plugins/git",  from:oh-my-zsh, as:plugin
+zplug "plugins/git-flow-completion",  from:oh-my-zsh, as:plugin
+zplug "plugins/stack",  from:oh-my-zsh, as:plugin
+zplug "plugins/cabal",  from:oh-my-zsh, as:plugin
+zplug "plugins/brew",  from:oh-my-zsh, as:plugin
+zplug "plugins/vagrant",  from:oh-my-zsh, as:plugin
+zplug "plugins/fabric",  from:oh-my-zsh, as:plugin
+
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting"
+
+zplug "mafredri/zsh-async"
+zplug "sindresorhus/pure"
+
+# zshプラグインのインストール
+zplug check || zplug install
+zplug load
 
 # viライクな操作
 bindkey -v
@@ -72,8 +90,12 @@ setopt hist_ignore_space
 # 履歴に保存するときに余分なスペースを削除
 setopt hist_reduce_blanks
 
-# vimで新規ファイルを開くときタブで開く
+# neovimで開く
+alias v='nvim'
+alias vi='nvim'
 alias vim='nvim'
+
+# vimで新規ファイルを開くときタブで開く
 # alias mvim='mvim --remote-tab-silent'
 
 # alias設定

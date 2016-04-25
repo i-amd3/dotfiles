@@ -88,8 +88,8 @@ do
     brew install $target
   fi
 done
+brew linkapps
 brew cleanup
-
 
 # brew cask install
 echo "7. brew install"
@@ -121,6 +121,9 @@ do
     brew cask install $target
   fi
 done
+
+# Update pkg
+for c in `brew cask list`; do ! brew cask info $c | grep -qF "Not installed" || brew cask install $c; done
 brew cask cleanup
 
 
@@ -140,16 +143,20 @@ fi
 
 
 # install zplug
-echo "10. install vim-plug"
+echo "10. install zplug"
+
 if [ ! -e  "$XDG_CONFIG_HOME/etc" ]; then
+  # make directory
   mkdir -p $XDG_CONFIG_HOME/etc
 fi
 
 if [ ! -e  "$XDG_CONFIG_HOME/etc/zplug" ]; then
+  # install
   git clone https://github.com/b4b4r07/zplug $XDG_CONFIG_HOME/etc/zplug
 fi
 
 if [ ! -h $HOME/.zplug ]; then
+  # create symbolic link
   ln -sf $XDG_CONFIG_HOME/etc/zplug $HOME/.zplug
 fi
 
@@ -188,7 +195,7 @@ if test $(which stack); then
     done
 
     if [ $flag == "false" ]; then
-      if [ $target == "hakyll-init"]; then
+      if [ $target == "hakyll-init" ]; then
         $target = "hakyll"
       fi
       echo "    - $target"
@@ -196,7 +203,6 @@ if test $(which stack); then
     fi
   done
 fi
-
 
 # Hoogle
 echo "12. Setting Hoogle"
@@ -215,4 +221,8 @@ echo "14. Setting Git"
 git config --global user.name "i-amd3"
 git config --global user.email d.kupanhy@gmail.com
 git config --global core.editor vim
+
+# change shell
+sudo sh -c "echo '/usr/local/bin/zsh' >> /etc/shells"
+chsh -s /usr/local/bin/zsh
 
