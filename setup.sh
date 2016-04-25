@@ -150,7 +150,7 @@ if [ ! -e  "$XDG_CONFIG_HOME/etc/zplug" ]; then
 fi
 
 if [ ! -h $HOME/.zplug ]; then
-  ln -sf ln -sf $XDG_CONFIG_HOME/etc/zplug $HOME/.zplug
+  ln -sf $XDG_CONFIG_HOME/etc/zplug $HOME/.zplug
 fi
 
 
