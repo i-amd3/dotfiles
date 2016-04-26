@@ -82,7 +82,7 @@ do
 
   if [ $flag == "false" ]; then
     if [ $target == "neovim" ]; then
-      $target="neovim/neovim/neovim"
+      target="neovim/neovim/neovim"
     fi
     echo "    - $target"
     brew install $target
@@ -175,19 +175,19 @@ if test $(which stack); then
     hakyll-init
     hlint
     happy
-    shelly
     turtle
     hawk
-    hasktags
     lushtags
     pandoc
+    psc
+    psc-ide
   )
 
   for target in ${SRCPKGS[@]}
   do
     flag="false"
 
-    for pkg in `ls $HOME/.local/bin/hakyll-init`
+    for pkg in `ls $HOME/.local/bin/`
     do
       if [ $pkg == $target ]; then
         flag="true"
@@ -196,8 +196,11 @@ if test $(which stack); then
 
     if [ $flag == "false" ]; then
       if [ $target == "hakyll-init" ]; then
-        $target = "hakyll"
+        target="hakyll"
+      elif [ $target == "psc" ]; then
+        target="purescript"
       fi
+
       echo "    - $target"
       stack install $target
     fi
