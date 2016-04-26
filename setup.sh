@@ -175,9 +175,6 @@ if test $(which stack); then
     hakyll-init
     hlint
     happy
-    turtle
-    hawk
-    lushtags
     pandoc
     psc
     psc-ide
