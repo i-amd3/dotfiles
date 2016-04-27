@@ -1,4 +1,3 @@
-
 set encoding=utf8
 set fileencoding=utf8
 
@@ -8,16 +7,24 @@ if !has('gui_running')
   set t_Co=256
 endif
 
-call plug#begin('~/.vim/plugged')
 
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+"----------------------------------------
+" zplug
+"---------------------------------------
+call plug#begin('$HOME/.vim/plugged')
 
-Plug 'rhysd/clever-f.vim'
+  " Keyword Auto-completion
+  Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+
+  " Repeatable f, F, t and T
+  Plug 'rhysd/clever-f.vim'
+
 call plug#end()
 
+
+"----------------------------------------
+" Vim settings
+"---------------------------------------
 filetype plugin indent on
 
 colorscheme koehler
@@ -31,4 +38,12 @@ let g:deoplete#enable_at_startup = 1
 
 "Python3 support
 "let g:python3_host_prog = '/usr/local/bin'
+
+
+"----------------------------------------
+" Function
+"---------------------------------------
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
 
