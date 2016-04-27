@@ -177,7 +177,6 @@ if test $(which stack); then
     happy
     pandoc
     psc
-    psc-ide
   )
 
   for target in ${SRCPKGS[@]}
@@ -199,7 +198,7 @@ if test $(which stack); then
       fi
 
       echo "    - $target"
-      stack install $target
+      stack install $target --resolver=nightly
     fi
   done
 fi
