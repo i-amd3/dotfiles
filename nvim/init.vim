@@ -7,6 +7,7 @@ if !has('gui_running')
   set t_Co=256
 endif
 
+let $PATH = $PATH . ':' . expand('$HOME/.local/bin/')
 
 "----------------------------------------
 " zplug
@@ -14,6 +15,9 @@ endif
 call plug#begin('$HOME/.vim/plugged')
 
   " Keyword Auto-completion
+  function! DoRemote(arg)
+    UpdateRemotePlugins
+  endfunction
   Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 
 
@@ -50,7 +54,7 @@ call plug#begin('$HOME/.vim/plugged')
   Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 
   " ghc-mod plugin
-  Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+  Plug 'neovimhaskell/neovim-ghcmod', { 'for': 'haskell' }
 
   " Auto-completion for haskell
   Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
@@ -72,50 +76,88 @@ filetype plugin indent on
 colorscheme koehler
 syntax on
 
-
-" **TODO Add comment**
+" Doesn't wrap
 set nowrap
 
+" the case of normal letters is ignore
 set ignorecase
-set smartcase
 
+" When start a new line with <CR> in insert mode or command
 set autoindent
 
+" show the line and column number
 set ruler
-set number
-set list
-set wildmenu
 
-set cursorline
-set cursorcolumn
+" show the line number
+set number
+
+" Show tabs
+set list
 set listchars=tab:>.,trail:_,extends:>,precedes:<,nbsp:%
 
+" Command-line completion
+set wildmenu
+
+" coloring cursor line and column
+set cursorline
+set cursorcolumn
+
+" Insert space using <TAB>
+set expandtab
+
+" For shiftwidth
+set smarttab
+
+" Number of spaces that a <TAB>
+set tabstop=2
+
+" Number of spaces thas a insert indent
 set shiftwidth=2
 set softtabstop=2
-set expandtab
-set tabstop=2
-set smarttab
 
 set clipboard+=unnamed
 
 " set guifont=Ricty\ Discord:h16
 " set guifontwide=Ricty\ Discord:h16
 
+" dispay status line
 set laststatus=2
 
+" Not create backup
 set nobackup
+
+" Not create swap
 set noswapfile
 
-set viminfo+=h
+" Not create viminfo
+set viminfo=
 
+" disable beeping
 set visualbell t_vb=
 
+setlocal omnifunc=necoghc#omnifunc
 
 "----------------------------------------
 " Variable
 "---------------------------------------
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" Enable neomake when to use haskell
+let g:neomake_haskell_enabled_makers = ['ghc-mod', 'hlint']
+
+" Setting necoghc
+let g:haskellmode_completion_ghc = 1
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
+let g:necoghc_enable_detailed_browse = 1
 
 "Python support
 "let g:python_host_prog = '/usr/local/bin'
@@ -131,6 +173,9 @@ autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
 autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
 autocmd QuickFixCmdPost *grep* cwindow
 
+autocmd! BufWritePost * Neomake
+
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 "----------------------------------------
 " KeyMapping
@@ -140,7 +185,4 @@ autocmd QuickFixCmdPost *grep* cwindow
 "----------------------------------------
 " Function
 "---------------------------------------
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
 

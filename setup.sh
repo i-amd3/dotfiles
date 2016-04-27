@@ -91,6 +91,7 @@ do
     brew install $target
   fi
 done
+brew linkapps
 brew cleanup
 
 # brew cask install
