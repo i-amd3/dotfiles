@@ -51,20 +51,23 @@ fi
 # brew install
 echo "6. brew install"
 SRCPKGS=(
-  neovim
-  python
-  python3
   ctags
+  git
   git-flow
   gnu-tar
   haskell-stack
   httpie
   jq
   jo
+  neovim
+  node
   p7zip
+  pandoc
   peco
+  purescript
+  python
+  python3
   tree
-  vim
   wget
   zsh
 )
@@ -88,7 +91,6 @@ do
     brew install $target
   fi
 done
-brew linkapps
 brew cleanup
 
 # brew cask install
@@ -175,8 +177,6 @@ if test $(which stack); then
     hakyll-init
     hlint
     happy
-    pandoc
-    psc
   )
 
   for target in ${SRCPKGS[@]}
@@ -193,8 +193,6 @@ if test $(which stack); then
     if [ $flag == "false" ]; then
       if [ $target == "hakyll-init" ]; then
         target="hakyll"
-      elif [ $target == "psc" ]; then
-        target="purescript"
       fi
 
       echo "    - $target"
@@ -203,25 +201,45 @@ if test $(which stack); then
   done
 fi
 
+
+# Install Purescript dev
+echo "12. install purescript dev"
+if test $(which psc); then
+  SRCPKGS=(
+    pulp
+    bower
+  )
+
+  for target in ${SRCPKGS[@]}
+  do
+    if test ! $(which $target); then
+      echo "    - $target"
+      npm install -g $target
+    fi
+  done
+fi
+
+
 # Hoogle
-echo "12. Setting Hoogle"
+echo "13. Setting Hoogle"
 if test $(which hoogle); then
   hoogle data all
 fi
 
 
 # Ricty
-echo "13. Install Ricty"
+echo "14. Install Ricty"
 curl -L 'https://gist.github.com/ysaotome/7286145/raw/installing_ricty_on_MacOSX.sh' | bash
 
 
 # Git
-echo "14. Setting Git"
+echo "15. Setting Git"
 git config --global user.name "i-amd3"
 git config --global user.email d.kupanhy@gmail.com
 git config --global core.editor vim
 
 # change shell
+echo "16. Change shell"
 sudo sh -c "echo '/usr/local/bin/zsh' >> /etc/shells"
 chsh -s /usr/local/bin/zsh
 
