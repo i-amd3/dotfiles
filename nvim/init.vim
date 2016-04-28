@@ -152,11 +152,10 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 
 " Enable neomake when to use haskell
-let g:neomake_haskell_enabled_makers = ['ghc-mod', 'hlint']
+let g:neomake_haskell_enabled_makers = ['hdevtool', 'hlint']
 
 " Setting necoghc
 let g:haskellmode_completion_ghc = 1
-let g:ycm_semantic_triggers = {'haskell' : ['.']}
 let g:necoghc_enable_detailed_browse = 1
 
 "Python support
@@ -173,9 +172,15 @@ autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
 autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
 autocmd QuickFixCmdPost *grep* cwindow
 
-autocmd! BufWritePost * Neomake
+augroup haskellautocomplete
+  autocmd!
+  autocmd! FileType haskell setlocal omnifunc=necoghc#omnifunc
+augroup END
 
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+augroup NeomakeHaskell
+  autocmd!
+  autocmd! BufWritePost *.hs Neomake
+augroup END
 
 "----------------------------------------
 " KeyMapping

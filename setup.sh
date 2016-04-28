@@ -176,6 +176,7 @@ if test $(which stack); then
     hoogle
     haddock
     hakyll-init
+    hdevtool
     hlint
     happy
   )
