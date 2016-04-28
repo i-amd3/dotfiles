@@ -65,12 +65,23 @@ call plug#begin('$HOME/.vim/plugged')
   " Add import
   Plug 'ujihisa/unite-haskellimport', { 'for': 'haskell' }
 
+
+  "----------------------------------
+  " purescript
+  "---------------------------------
+  " Syntax Highlighting and Indentation
+  Plug 'raichoo/purescript-vim', { 'for': 'purescript' }
+
+  " psc-ide plugin
+  Plug 'FrigoEU/psc-ide-vim', { 'for': 'purescript' }
+
 call plug#end()
 
 
 "----------------------------------------
 " Vim settings
 "---------------------------------------
+filetype on
 filetype plugin indent on
 
 colorscheme koehler
@@ -135,7 +146,6 @@ set viminfo=
 " disable beeping
 set visualbell t_vb=
 
-setlocal omnifunc=necoghc#omnifunc
 
 "----------------------------------------
 " Variable
@@ -168,19 +178,16 @@ let g:necoghc_enable_detailed_browse = 1
 "----------------------------------------
 " Autocmd
 "---------------------------------------
-autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
-autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
-autocmd QuickFixCmdPost *grep* cwindow
+" Filetype
+autocmd! BufRead,BufNewFile,BufWrite *.md set filetype=markdown
+autocmd! BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
+autocmd! BufRead,BufNewFile,BufWrite *.purs set filetype=purescript
 
-augroup haskellautocomplete
-  autocmd!
-  autocmd! FileType haskell setlocal omnifunc=necoghc#omnifunc
-augroup END
+autocmd! QuickFixCmdPost *grep* cwindow
 
-augroup NeomakeHaskell
-  autocmd!
-  autocmd! BufWritePost *.hs Neomake
-augroup END
+" run cmd when filetype is haskell
+autocmd! FileType haskell setlocal omnifunc=necoghc#omnifunc
+autocmd! BufWritePost *.hs Neomake
 
 "----------------------------------------
 " KeyMapping
