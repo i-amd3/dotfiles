@@ -56,8 +56,7 @@ call plug#begin('$HOME/.vim/plugged')
   Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 
   " ghc-mod plugin
-  Plug 'neovimhaskell/neovim-ghcmod', { 'for': 'haskell' }
-  " Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+  Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 
   " Auto-completion for haskell
   Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
@@ -167,8 +166,8 @@ let g:UltiSnipsEditSplit="vertical"
 " Open window when error is found
 let g:neomake_open_list = 2
 
-" Enable neomake when to use haskell
-let g:neomake_haskell_enabled_makers = ['hdevtool', 'hlint']
+" Enable makers when to use haskell
+let g:neomake_haskell_enabled_makers = ['ghcmod', 'hlint']
 
 " Setting necoghc
 let g:haskellmode_completion_ghc = 1

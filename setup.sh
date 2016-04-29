@@ -177,7 +177,6 @@ if test $(which stack); then
     haddock
     hakyll-init
     hasktags
-    hdevtools
     hlint
     happy
   )
