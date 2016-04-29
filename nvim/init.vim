@@ -162,6 +162,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+" Open window when error is found
+let g:neomake_open_list = 2
+
 " Enable neomake when to use haskell
 let g:neomake_haskell_enabled_makers = ['hdevtool', 'hlint']
 
