@@ -55,6 +55,7 @@ call plug#begin('$HOME/.vim/plugged')
 
   " ghc-mod plugin
   Plug 'neovimhaskell/neovim-ghcmod', { 'for': 'haskell' }
+  " Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 
   " Auto-completion for haskell
   Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
