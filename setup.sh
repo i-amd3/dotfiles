@@ -225,13 +225,21 @@ fi
 # Hoogle
 echo "13. Setting Hoogle"
 if test $(which hoogle); then
-  hoogle data all
+  h=`hoogle 'a -> a'`
+  if test $? != 0; then
+    hoogle data all
+  fi
 fi
 
 
 # Ricty
 echo "14. Install Ricty"
-curl -L 'https://gist.github.com/ysaotome/7286145/raw/installing_ricty_on_MacOSX.sh' | bash
+
+h=`ls /Library/Fonts | grep "Ricty*"`
+
+if test "$h" = "" ; then
+  curl -L 'https://gist.github.com/ysaotome/7286145/raw/installing_ricty_on_MacOSX.sh' | bash
+fi
 
 
 # Git
