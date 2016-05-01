@@ -1,4 +1,3 @@
-set encoding=utf8
 set fileencoding=utf8
 
 if !1 | finish | endif
@@ -18,6 +17,7 @@ call plug#begin('$HOME/.vim/plugged')
   function! DoRemote(arg)
     UpdateRemotePlugins
   endfunction
+  Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
   Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 
 
@@ -56,7 +56,7 @@ call plug#begin('$HOME/.vim/plugged')
   Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 
   " ghc-mod plugin
-  Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+  Plug 'neovimhaskell/neovim-ghcmod', { 'for': 'haskell' }
 
   " Auto-completion for haskell
   Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
@@ -88,6 +88,12 @@ filetype plugin indent on
 
 colorscheme koehler
 syntax on
+
+
+" Filetype
+autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
+autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
+autocmd BufRead,BufNewFile,BufWrite *.purs set filetype=purescript
 
 " Doesn't wrap
 set nowrap
@@ -148,10 +154,14 @@ set viminfo=
 " disable beeping
 set visualbell t_vb=
 
+" Set tags files
+set tags=tags;/,codex.tags;/
 
 "----------------------------------------
 " Variable
 "---------------------------------------
+let mapleader = "\<Space>"
+
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 
@@ -165,6 +175,9 @@ let g:UltiSnipsEditSplit="vertical"
 
 " Open window when error is found
 let g:neomake_open_list = 2
+
+" run cmd when filetype is haskell
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 " Enable makers when to use haskell
 let g:neomake_haskell_enabled_makers = ['ghcmod', 'hlint']
@@ -214,25 +227,44 @@ let g:tagbar_type_haskell = {
 
 
 "----------------------------------------
-" Autocmd
+" Function
 "---------------------------------------
-" Filetype
-autocmd! BufRead,BufNewFile,BufWrite *.md set filetype=markdown
-autocmd! BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
-autocmd! BufRead,BufNewFile,BufWrite *.purs set filetype=purescript
-
+autocmd BufWritePost *.hs Neomake
 autocmd! QuickFixCmdPost *grep* cwindow
-
-" run cmd when filetype is haskell
-autocmd! FileType haskell setlocal omnifunc=necoghc#omnifunc
-autocmd! BufWritePost *.hs Neomake
 
 "----------------------------------------
 " KeyMapping
 "---------------------------------------
+nnoremap <Space> <Nop>
+nnoremap <DEL> <Nop>
 
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
 
-"----------------------------------------
-" Function
-"---------------------------------------
+nnoremap l <Space>
+nnoremap h <BS>
+nnoremap j gj
+nnoremap k gk
+
+nnoremap <Leader>h <S-i>
+nnoremap <Leader>l <S-a>
+
+" nnoremap <Leader>wj <C-w>j
+" nnoremap <Leader>wk <C-w>k
+" nnoremap <Leader>wh <C-w>h
+" nnoremap <Leader>wl <C-w>l
+
+" nnoremap <Leader>wvs :vs<CR>
+" nnoremap <Leader>wsp :sp<CR>
+
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
+nnoremap <silent> <Leader>r :source $MYVIMRC<CR>
+
+nnoremap <silent> <Leader>y yiw
+nnoremap <silent> <Leader>d diw
+
+nnoremap <Leader>bn :bnext<CR>
+nnoremap <Leader>bp :bprevious<CR>
+
+tnoremap <Esc> <C-\><C-n>
 

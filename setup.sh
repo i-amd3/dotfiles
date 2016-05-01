@@ -172,6 +172,7 @@ if test $(which stack); then
 
   SRCPKGS=(
     alex
+    codex
     ghc-mod
     hoogle
     haddock
@@ -250,6 +251,8 @@ git config --global core.editor vim
 
 # change shell
 echo "16. Change shell"
-sudo sh -c "echo '/usr/local/bin/zsh' >> /etc/shells"
-chsh -s /usr/local/bin/zsh
+if test "$SHELL" != "/usr/local/bin/zsh" ; then
+  sudo sh -c "echo '/usr/local/bin/zsh' >> /etc/shells"
+  chsh -s /usr/local/bin/zsh
+fi
 

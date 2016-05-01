@@ -14,7 +14,7 @@ export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
 
 export XDG_CONFIG_HOME=$HOME/dotfiles
 
-# zplug 初期設定(予定)
+# zplug 初期設定(
 source $HOME/.zplug/zplug
 
 # zshプラグイン
