@@ -18,7 +18,6 @@ call plug#begin('$HOME/.vim/plugged')
     UpdateRemotePlugins
   endfunction
   Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-  Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 
 
   "----------------------------------
@@ -89,7 +88,6 @@ filetype plugin indent on
 colorscheme koehler
 syntax on
 
-
 " Filetype
 autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
 autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
@@ -157,6 +155,7 @@ set visualbell t_vb=
 " Set tags files
 set tags=tags;/,codex.tags;/
 
+
 "----------------------------------------
 " Variable
 "---------------------------------------
@@ -218,12 +217,6 @@ let g:tagbar_type_haskell = {
         \ 'type'   : 't'
     \ }
 \ }
-
-"Python support
-"let g:python_host_prog = '/usr/local/bin'
-
-"Python3 support
-"let g:python3_host_prog = '/usr/local/bin'
 
 
 "----------------------------------------
