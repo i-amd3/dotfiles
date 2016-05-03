@@ -1,10 +1,4 @@
-.vim/autoload/
-.vim/bundle/
-.vim/plugin/
-.oh-my-zsh/
-.oh-my-zsh
 etc/
-etc
 nvim/autoload/
-nvim/autoload
+nvim/plugged/
 
