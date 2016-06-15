@@ -9,6 +9,8 @@ export XDG_CONFIG_HOME=$HOME/.config
 echo "2. Download Dotfiles"
 if [ ! -e  $dotfiles ]; then
   git clone https://github.com/i-amd3/dotfiles $dotfiles
+  mkdir -p $dotfiles/vim
+  mkdir -p $XDG_CONFIG_HOME
 fi
 
 # Create symbolic link
@@ -56,6 +58,7 @@ SRCPKGS=(
   python3
   tree
   wget
+  w3m
   zsh
 )
 
@@ -126,8 +129,8 @@ pip3 install neovim
 
 # install vim-plug
 echo "9. install vim-plug"
-if [ ! -e  "$dotfiles/nvim/autoload/plug.vim" ]; then
-  curl -fLo $dotfiles/nvim/autoload/plug.vim --create-dirs \
+if [ ! -e  "$dotfiles/vim/autoload/plug.vim" ]; then
+  curl -fLo $dotfiles/vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 

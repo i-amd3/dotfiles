@@ -1,4 +1,5 @@
 etc/
+vim/
 nvim/autoload/
 nvim/plugged/
 
