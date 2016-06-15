@@ -1,38 +1,24 @@
 #!/bin/sh
 
-# Get dotfiles
-echo "1. Download Dotfiles"
-if [ ! -e  "$HOME/dotfiles" ]; then
-  git clone https://github.com/i-amd3/dotfiles $HOME/dotfiles
-fi
-
 # Set Environment Variables
-echo "2. Set Environment Variables"
-export XDG_CONFIG_HOME=$HOME/dotfiles
+echo "1. Set Environment Variables"
+dotfiles="$HOME/dotfiles"
+export XDG_CONFIG_HOME=$HOME/.config
+
+# Get dotfiles
+echo "2. Download Dotfiles"
+if [ ! -e  $dotfiles ]; then
+  git clone https://github.com/i-amd3/dotfiles $dotfiles
+fi
 
 # Create symbolic link
 echo "3. Create symbolic link"
-SRCFILES=(
-  nvim
-  nvim/init.vim
-  zshrc
-)
+ln -sf $dotfiles/vim    $XDG_CONFIG_HOME/nvim
+ln -sf $dotfiles/vimrc  $XDG_CONFIG_HOME/nvim/init.vim
 
-for file in ${SRCFILES[@]}
-do
-  if [ $file == "nvim" ]; then
-    dst=".vim"
-  elif [ $file == "nvim/init.vim" ]; then
-    dst=".vimrc"
-  else
-    dst=".${file}"
-  fi
-
-  if [ ! -h $HOME/$dst ]; then
-    echo "    - $HOME/$dst"
-    ln -sf $XDG_CONFIG_HOME/$file $HOME/$dst
-  fi
-done
+ln -sf $dotfiles/vim    $HOME/.vim
+ln -sf $dotfiles/vimrc  $HOME/.vimrc
+ln -sf $dotfiles/zshrc  $HOME/.zshrc
 
 # Install Homebrew
 echo "4. Install Homebrew"
@@ -59,6 +45,7 @@ SRCPKGS=(
   httpie
   jq
   jo
+  macvim
   neovim
   node
   p7zip
@@ -139,28 +126,27 @@ pip3 install neovim
 
 # install vim-plug
 echo "9. install vim-plug"
-if [ ! -e  "$XDG_CONFIG_HOME/nvim/autoload/plug.vim" ]; then
-  curl -fLo $XDG_CONFIG_HOME/nvim/autoload/plug.vim --create-dirs \
+if [ ! -e  "$dotfiles/nvim/autoload/plug.vim" ]; then
+  curl -fLo $dotfiles/nvim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
-
 
 # install zplug
 echo "10. install zplug"
 
-if [ ! -e  "$XDG_CONFIG_HOME/etc" ]; then
+if [ ! -e  "$dotfiles/etc" ]; then
   # make directory
-  mkdir -p $XDG_CONFIG_HOME/etc
+  mkdir -p $dotfiles/etc
 fi
 
-if [ ! -e  "$XDG_CONFIG_HOME/etc/zplug" ]; then
+if [ ! -e  "$dotfiles/etc/zplug" ]; then
   # install
-  git clone https://github.com/b4b4r07/zplug $XDG_CONFIG_HOME/etc/zplug
+  git clone https://github.com/b4b4r07/zplug $dotfiles/etc/zplug
 fi
 
-if [ ! -h $HOME/.zplug ]; then
+if [ ! -h $dotfiles/.zplug ]; then
   # create symbolic link
-  ln -sf $XDG_CONFIG_HOME/etc/zplug $HOME/.zplug
+  ln -sf $dotfiles/etc/zplug $HOME/.zplug
 fi
 
 

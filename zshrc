@@ -1,6 +1,6 @@
 #
 # 環境設定
-export EDITOR=vim
+export EDITOR=nvim
 export LANG=ja_JP.UTF-8
 export TERM=xterm-256color
 
@@ -12,7 +12,7 @@ export PATH=$HOME/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
 
-export XDG_CONFIG_HOME=$HOME/dotfiles
+export XDG_CONFIG_HOME=$HOME/.config
 
 # zplug 初期設定(
 source $HOME/.zplug/zplug
@@ -91,12 +91,10 @@ setopt hist_ignore_space
 setopt hist_reduce_blanks
 
 # neovimで開く
-alias v='nvim'
-alias vi='nvim'
 alias vim='nvim'
 
 # vimで新規ファイルを開くときタブで開く
-# alias mvim='mvim --remote-tab-silent'
+alias mvim='mvim --remote-tab-silent'
 
 # alias設定
 if [ -x "`which peco`" ]; then
