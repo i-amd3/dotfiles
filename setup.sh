@@ -180,9 +180,14 @@ if [ ! -h $dotfiles/.zplug ]; then
   ln -sf $dotfiles/etc/zplug $HOME/.zplug
 fi
 
+# Install Rust
+echo "11. install Rust"
+if test ! $(which rustc); then
+  curl -sSf https://static.rust-lang.org/rustup.sh | sh
+fi
 
 # Install Haskell Library
-echo "11. install Haskell Library"
+echo "12. install Haskell Library"
 if test $(which stack); then
   stack update
   stack upgrade
@@ -223,7 +228,7 @@ fi
 
 
 # Install Purescript dev
-echo "12. install purescript dev"
+echo "13. install purescript dev"
 if test $(which psc); then
   SRCPKGS=(
     pulp
@@ -241,7 +246,7 @@ fi
 
 
 # Hoogle
-echo "13. Setting Hoogle"
+echo "14. Setting Hoogle"
 if test $(which hoogle); then
   h=`hoogle 'a -> a'`
   if test $? != 0; then
@@ -251,7 +256,7 @@ fi
 
 
 # Ricty
-echo "14. Install Ricty"
+echo "15. Install Ricty"
 
 h=`ls /Library/Fonts | grep "Ricty*"`
 
@@ -261,13 +266,13 @@ fi
 
 
 # Git
-echo "15. Setting Git"
+echo "16. Setting Git"
 git config --global user.name "i-amd3"
 git config --global user.email d.kupanhy@gmail.com
 git config --global core.editor vim
 
 # change shell
-echo "16. Change shell"
+echo "17. Change shell"
 if test "$SHELL" != "/usr/local/bin/zsh" ; then
   sudo sh -c "echo '/usr/local/bin/zsh' >> /etc/shells"
   chsh -s /usr/local/bin/zsh
