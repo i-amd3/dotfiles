@@ -81,6 +81,16 @@ call plug#begin('$HOME/.vim/plugged')
   " psc-ide plugin
   Plug 'FrigoEU/psc-ide-vim', { 'for': 'purescript' }
 
+
+  "----------------------------------
+  " Rust
+  "---------------------------------
+  " Syntax Highlighting and Indentation
+  Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+
+  " Auto-completion for Rust
+  Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+
 call plug#end()
 
 
@@ -108,13 +118,21 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-let $PATH = $PATH . ':' . expand('~/bin/')
+let $PATH = $PATH . ':' . expand('$HOME/bin/')
+let $PATH = $PATH . ':' . expand('$HOME/.cargo/bin')
 
 let g:git_diff_normal="git-diff-normal"
 let g:git_diff_normal_opts=["--diff-algorithm=histogram"]
 
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
+
+let g:rustfmt_autosave = 1
+let g:rustfmt_command = '$HOME/.cargo/bin/rustfmt'
+
+set hidden
+let g:racer_cmd = '$HOME/.cargo/bin/racer'
+let $RUST_SRC_PATH="$HOME/dotfiles/etc/rustc-1.9.0/src/"
 
 " run cmd when filetype is haskell
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
@@ -283,9 +301,9 @@ set viminfo+=h
 
 set visualbell t_vb=
 
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
 
 vnoremap <Space> <Nop>
 nnoremap <Space><Space> v

@@ -185,6 +185,8 @@ echo "11. install Rust"
 if test ! $(which rustc); then
   curl -sSf https://static.rust-lang.org/rustup.sh | sh
 fi
+cargo install rustfmt
+cargo install racer
 
 # Install Haskell Library
 echo "12. install Haskell Library"
