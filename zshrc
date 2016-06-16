@@ -124,12 +124,14 @@ bindkey '^R' peco_select_history
 
 # zshプラグイン
 zplug "plugins/git",  from:oh-my-zsh
-zplug "plugins/git-flow-completion",  from:oh-my-zsh
+zplug "plugins/git-flow",  from:oh-my-zsh
 zplug "plugins/stack",  from:oh-my-zsh
 zplug "plugins/cabal",  from:oh-my-zsh
 zplug "plugins/brew",  from:oh-my-zsh
 zplug "plugins/vagrant",  from:oh-my-zsh
 zplug "plugins/fabric",  from:oh-my-zsh
+zplug "plugins/rust",  from:oh-my-zsh
+zplug "plugins/vi-mode",  from:oh-my-zsh
 
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
