@@ -1,4 +1,3 @@
-set encoding=utf8
 set fileencoding=utf8
 
 if !1 | finish | endif
@@ -6,6 +5,13 @@ if !1 | finish | endif
 if !has('gui_running')
   set t_Co=256
 endif
+
+let $PATH = $PATH . ':' . expand('$HOME/bin/')
+let $PATH = $PATH . ':' . expand('$HOME/.cargo/bin')
+
+augroup _vimrc
+  autocmd!
+augroup END
 
 "----------------------------------------
 " zplug
@@ -34,7 +40,6 @@ call plug#begin('$HOME/.vim/plugged')
 
   " TODO
   Plug 'itchyny/lightline.vim'
-  Plug 'mhinz/vim-startify'
   Plug 'yuratomo/w3m.vim'
 
   "----------------------------------
@@ -97,15 +102,86 @@ call plug#end()
 "----------------------------------------
 " Vim settings
 "---------------------------------------
+filetype on
 filetype plugin indent on
 
 colorscheme koehler
 syntax on
 
+" Filetype
+autocmd _vimrc BufRead,BufNewFile,BufWrite *.md set filetype=markdown
+autocmd _vimrc BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
+autocmd _vimrc BufRead,BufNewFile,BufWrite *.purs set filetype=purescript
+autocmd _vimrc BufRead,BufNewFile,BufWrite *.rs set filetype=rust
+
+" Doesn't wrap
+set nowrap
+
+" the case of normal letters is ignore
+set ignorecase
+
+" When start a new line with <CR> in insert mode or command
+set autoindent
+
+" show the line and column number
+set ruler
+
+" show the line number
+set number
+
+" Show tabs
+set list
+set listchars=tab:>.,trail:_,extends:>,precedes:<,nbsp:%
+
+" Command-line completion
+set wildmenu
+
+" coloring cursor line and column
+set cursorline
+set cursorcolumn
+
+" Insert space using <TAB>
+set expandtab
+
+" For shiftwidth
+set smarttab
+
+" Number of spaces that a <TAB>
+set tabstop=2
+
+" Number of spaces thas a insert indent
+set shiftwidth=2
+set softtabstop=2
+
+set clipboard+=unnamed
+
+" Gui Font
+set guifont=Ricty\ Discord:h16
+set guifontwide=Ricty\ Discord:h16
+
+" dispay status line
+set laststatus=2
+
+" Not create backup
+set nobackup
+
+" Not create swap
+set noswapfile
+
+" Not create viminfo
+set viminfo+=h
+
+" disable beeping
+set visualbell t_vb=
+
+" Set tags files
+set tags=tags;/,codex.tags;/
+
 
 "----------------------------------------
 " Variable
 "---------------------------------------
+let mapleader = "\<Space>"
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
@@ -118,34 +194,65 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-let $PATH = $PATH . ':' . expand('$HOME/bin/')
-let $PATH = $PATH . ':' . expand('$HOME/.cargo/bin')
+" TODO
+let g:w3m#command = '/usr/local/Cellar/w3m/0.5.3/bin/w3m'
 
-let g:git_diff_normal="git-diff-normal"
-let g:git_diff_normal_opts=["--diff-algorithm=histogram"]
 
-let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_safe_mode_by_default = 0
+" TODO
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
-let g:rustfmt_autosave = 1
-let g:rustfmt_command = '$HOME/.cargo/bin/rustfmt'
+" TODO
+let g:syntastic_check_on_open = 1
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "active_filetypes": ["haskell","javascript","rust"],
+    \ "passive_filetypes": [] }
 
-set hidden
-let g:racer_cmd = '$HOME/.cargo/bin/racer'
-let $RUST_SRC_PATH="$HOME/dotfiles/etc/rustc-1.9.0/src/"
+" TODO
+let g:lightline = {
+      \ 'colorscheme': 'landscape',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'filelen', 'date' ],
+      \              [ 'syntastic', 'lineinfo' ], ['percent'],
+      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'component': {
+      \   'date': '%{Date()}',
+      \   'filelen': '%{b:charCounterCount}',
+      \   'readonly': '%{&readonly?"x":""}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
+      \ },
+      \ 'separator': { 'lef': '', 'right': ''},
+      \ 'subseparator': { 'left': '|', 'right': '|'},
+      \ }
 
+" -- Rust Settings
+" --
+autocmd _vimrc FileType rust let g:rustfmt_autosave = 1
+autocmd _vimrc FileType rust let g:rustfmt_command = '$HOME/.cargo/bin/rustfmt'
+
+autocmd _vimrc FileType rust set hidden
+autocmd _vimrc FileType rust let g:racer_cmd = '$HOME/.cargo/bin/racer'
+autocmd _vimrc FileType rust let $RUST_SRC_PATH="$HOME/dotfiles/etc/rustc-1.9.0/src/"
+
+" -- Haskell Settings
+" --
 " run cmd when filetype is haskell
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+autocmd _vimrc FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+" Setting Haskell File
+autocmd _vimrc FileType haskell let g:haskell_conceal              = 0
+autocmd _vimrc FileType haskell let g:haskell_conceal_enumerations = 0
 
 " Setting necoghc
-let g:haskellmode_completion_ghc = 1
-let g:ycm_semantic_triggers = {'haskell' : ['.']}
-let g:necoghc_enable_detailed_browse = 1
+autocmd _vimrc FileType haskell let g:haskellmode_completion_ghc = 1
+autocmd _vimrc FileType haskell let g:necoghc_enable_detailed_browse = 1
 
-let g:haskell_conceal              = 0
-let g:haskell_conceal_enumerations = 0
-
-let g:tagbar_type_haskell = {
+autocmd _vimrc FileType haskell let g:tagbar_type_haskell = {
     \ 'ctagsbin'  : 'hasktags',
     \ 'ctagsargs' : '-x -c -o-',
     \ 'kinds'     : [
@@ -177,168 +284,104 @@ let g:tagbar_type_haskell = {
     \ }
     \ }
 
-let g:lightline = {
-      \ 'colorscheme': 'landscape',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
-      \   'right': [ [ 'filelen', 'date' ],
-      \              [ 'syntastic', 'lineinfo' ], ['percent'],
-      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'component': {
-      \   'date': '%{Date()}',
-      \   'filelen': '%{b:charCounterCount}',
-      \   'readonly': '%{&readonly?"x":""}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
-      \ },
-      \ 'separator': { 'lef': '', 'right': ''},
-      \ 'subseparator': { 'left': '|', 'right': '|'},
-      \ }
 
-let g:vimfiler_ignore_pattern = '\%(\.git\|\.DS_Store\)$'
+"----------------------------------------
+" Function
+"---------------------------------------
+" TODO
+autocmd! _vimrc QuickFixCmdPost *grep* cwindow
 
-let g:startify_custom_header = map(split(system('date +"%m/%d/%Y %p %I:%M:%S"'), '\n'), '"   ". v:val') + ['','']
-
-let g:w3m#command = '/usr/local/Cellar/w3m/0.5.3/bin/w3m'
-
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippets#snippets_directory='$HOME/.vim/bundle/vim-snippets/snippets'
-
-function! RndAlpha()
-  let l:xs = []
-  let l:ax = "acdfghlmnoprwxzy"
-  for i in range(0,strlen(l:ax)-1)
-    call add(l:xs, strpart(l:ax,i,1))
-  endfor
-
-  let l:yx = []
-  for i in range(0,9)
-    let l:rnd = system(printf("getRnd %o", len(l:xs)-1-i))
-    if l:rnd >= len(l:xs)
-      let l:rnd = 0
-    endif
-    call add(l:yx, remove(l:xs, l:rnd))
-  endfor
-
-  return yx
+" TODO
+function! Date()
+  return strftime("%m/%d/%Y %H:%M")
 endfunction
 
-let g:startify_custom_indices = RndAlpha()
+" TODO
+function! ZenkakuSpace()
+    highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
+endfunction
 
-let g:startify_list_order = [
-  \ ['   LRU:'],
-  \ 'files',
-  \ ['   LRU within this dir:'],
-  \ 'dir',
-  \ ['   Sessions:'],
-  \ 'sessions',
-  \ ['   Bookmarks:'],
-  \ 'bookmarks',
-  \ ]
+" TODO
+if has('syntax')
+    augroup ZenkakuSpace
+        autocmd!
+        autocmd ColorScheme       * call ZenkakuSpace()
+        autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+    augroup END
+    call ZenkakuSpace()
+endif
 
-let g:startify_bookmarks = [
-  \ '$MYVIMRC',
-  \ '~/.zshrc',
-  \ ]
+" TODO
+augroup CharCounter
+    autocmd!
+    autocmd BufNew,BufEnter,BufWrite,InsertLeave * call <SID>Update()
+augroup END
 
-let g:startify_files_number = 5
+" TODO
+function! s:Update()
+    let b:charCounterCount = s:CharCount()
+endfunction
 
-let g:syntastic_check_on_open = 1
-let g:syntastic_mode_map = {
-    \ "mode": "active",
-    \ "active_filetypes": ["haskell","javascript"],
-    \ "passive_filetypes": [] }
+" TODO
+function! s:CharCount()
+    let l:result = 0
+    for l:linenum in range(0, line('$'))
+        let l:line = getline(l:linenum)
+        let l:result += strlen(substitute(l:line, ".", "x", "g"))
+    endfor
+    return l:result
+endfunction
 
-set nowrap
+" TODO Rewrite
+" command! -nargs=? FiveTenets call Fivetenets(<args>)
 
-set ignorecase
-set smartcase
 
-set autoindent
-
-set ruler
-set number
-set list
-set wildmenu
-
-set cursorline
-set cursorcolumn
-set listchars=tab:>.,trail:_,extends:>,precedes:<,nbsp:%
-
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-set tabstop=2
-set smarttab
-
-set clipboard+=unnamed
-
-set guifont=Ricty\ Discord:h16
-set guifontwide=Ricty\ Discord:h16
-
-set laststatus=2
-
-set nobackup
-set noswapfile
-
-set viminfo+=h
-
-set visualbell t_vb=
-
+"----------------------------------------
+" KeyMapping
+"---------------------------------------
 " map /  <Plug>(incsearch-forward)
 " map ?  <Plug>(incsearch-backward)
 " map g/ <Plug>(incsearch-stay)
 
+nnoremap <Space> <Nop>
 vnoremap <Space> <Nop>
-nnoremap <Space><Space> v
+nnoremap <DEL> <Nop>
+vnoremap <DEL> <Nop>
 
-nnoremap <Space>l $
-nnoremap <Space>h 0
-vnoremap <Space>l $
-vnoremap <Space>h 0
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+inoremap <Leader>w <Esc>:w<CR>i
+inoremap <Leader>q <Esc>:q<CR>i
 
-nnoremap <Space>w :w<CR>
-nnoremap <Space>q :q<CR>
-inoremap <Space>w <Esc>:w<CR>i
-inoremap <Space>q <Esc>:q<CR>i
+nnoremap l <Space>
+nnoremap h <BS>
+nnoremap j gj
+nnoremap k gk
 
-nnoremap <F3> :tabe<CR>:VimFiler<CR>
-nnoremap <Space>e :VimFilerExplorer -split -winwidth=30 -toggle -no-quit<CR>
+nnoremap <Leader><Leader> v
 
-nnoremap <F4> :tabe<CR>:VimShell<CR>
-nnoremap <Space>v :VimShellPop<CR><Esc><C-w>Ja
+nnoremap <Leader>l $
+nnoremap <Leader>h 0
+vnoremap <Leader>l $
+vnoremap <Leader>h 0
 
-nnoremap <Space>ft :FiveTenets<CR>
+" TODO Rewrite
+" nnoremap <Space>ft :FiveTenets<CR>
 
-nnoremap <Space>ga :Gwrite<CR>
-nnoremap <Space>gr :Gread<CR>
-nnoremap <Space>gs :Gstatus<CR>
-nnoremap <Space>gc :Gcommit<CR>
-nnoremap <Space>gl :Glog<CR>
-nnoremap <Space>gd :Gdiff<CR>
-nnoremap <Space>gb :Gblame<CR>
-nnoremap <Space>gm :Gremove<CR>
+nnoremap <Leader>ga :Gwrite<CR>
+nnoremap <Leader>gr :Gread<CR>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gl :Glog<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gm :Gremove<CR>
 
-nnoremap <S-h> <S-i>
-nnoremap <S-l> <S-a>
-vnoremap <S-h> <S-i>
-vnoremap <S-l> <S-a>
+" TODO DELETE ?
+" nnoremap <S-h> <S-i>
+" nnoremap <S-l> <S-a>
+" vnoremap <S-h> <S-i>
+" vnoremap <S-l> <S-a>
 
 nnoremap w <Nop>
 nnoremap W <Nop>
@@ -370,14 +413,13 @@ nnoremap <C-l> gt
 nnoremap <C-h> gT
 
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
-nnoremap <silent> <F2> :tabe<CR>:Startify<CR>
-nnoremap <silent> <Space>r :source $MYVIMRC<CR>
+nnoremap <silent> <Leader>r :source $MYVIMRC<CR>
 
-nnoremap <silent> <Space>ay :%yank<CR>
-nnoremap <silent> <Space>ad :%delete<CR>
-nnoremap <silent> <Space>y yiw
-nnoremap <silent> <Space>d diw
-nnoremap <silent> <Space>i :set invrelativenumber<CR>
+nnoremap <silent> <Leader>ay :%yank<CR>
+nnoremap <silent> <Leader>ad :%delete<CR>
+nnoremap <silent> <Leader>y yiw
+nnoremap <silent> <Leader>d diw
+nnoremap <silent> <Leader>i :set invrelativenumber<CR>
 
 inoremap <C-j> <DOWN>
 inoremap <C-k> <UP>
@@ -398,119 +440,10 @@ inoremap >> <><LEFT>
 inoremap <C-f> <PageDown>
 inoremap <C-b> <PageUp>
 
-nnoremap <Space>f :vim<Space>"<C-r><C-w>"<Space><C-r>=getcwd()<CR>/**
+nnoremap <Leader>f :vim<Space>"<C-r><C-w>"<Space><C-r>=getcwd()<CR>/**
 
-nnoremap <Space>c :Codic<Space>
+nnoremap <Leader>bn :bnext<CR>
+nnoremap <Leader>bp :bprevious<CR>
 
-nnoremap bn :bnext<CR>
-nnoremap bp :bprevious<CR>
-
-autocmd BufRead,BufNewFile,BufWrite *.md set filetype=markdown
-autocmd BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
-autocmd QuickFixCmdPost *grep* cwindow
-
-function! Date()
-  return strftime("%m/%d/%Y %H:%M")
-endfunction
-
-function! ZenkakuSpace()
-    highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
-endfunction
-
-if has('syntax')
-    augroup ZenkakuSpace
-        autocmd!
-        autocmd ColorScheme       * call ZenkakuSpace()
-        autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
-    augroup END
-    call ZenkakuSpace()
-endif
-
-augroup CharCounter
-    autocmd!
-    autocmd BufNew,BufEnter,BufWrite,InsertLeave * call <SID>Update()
-augroup END
-
-function! s:Update()
-    let b:charCounterCount = s:CharCount()
-endfunction
-
-function! s:CharCount()
-    let l:result = 0
-    for l:linenum in range(0, line('$'))
-        let l:line = getline(l:linenum)
-        let l:result += strlen(substitute(l:line, ".", "x", "g"))
-    endfor
-    return l:result
-endfunction
-
-function! GitDiffNormal()
-  let args=[g:git_diff_normal]
-  if &diffopt =~ "iwhite"
-    call add(args, "--ignore-all-space")
-  endif
-  call extend(args, g:git_diff_normal_opts)
-  call extend(args, [v:fname_in, v:fname_new])
-  let cmd="!" . join(args, " ") . ">" . v:fname_out
-  silent execute cmd
-  redraw!
-endfunction
-
-if executable(g:git_diff_normal)
-  call system(g:git_diff_normal)
-  if v:shell_error == 0
-    set diffexpr=GitDiffNormal()
-  endif
-endif
-
-command! -nargs=? FiveTenets call Fivetenets(<args>)
-
-function! Fivetenets(...)
-  let ft = ["Give a good greeting!"
-        \,"Try not to give up!"
-        \,"Sleep well, eat well!"
-        \,"If you're troubled, talk to someone!"
-        \,"You're likely to succeed if you try!"]
-  let rnd = system("getRnd 5")
-  let n = rnd - 1
-  let t = ft[n]
-  echo "Hero Club Five Tenets!!"
-  echo t
-endfunction
-
-augroup HeroClubMessage
-    autocmd!
-    autocmd BufNewFile * call Fivetenets()
-augroup END
-
-inoremap <silent> <C-c>  <C-R>=<SID>codic_complete()<CR>
-function! s:codic_complete()
-  let line = getline('.')
-  let start = match(line, '\k\+$')
-  let cand = s:codic_candidates(line[start :])
-  call complete(start +1, cand)
-  return ''
-endfunction
-function! s:codic_candidates(arglead)
-  let cand = codic#search(a:arglead, 30)
-  " error
-  if type(cand) == type(0)
-    return []
-  endif
-  " english -> english terms
-  if a:arglead =~# '^\w\+$'
-    return map(cand, '{"word": v:val["label"], "menu": join(map(copy(v:val["values"]), "v:val.word"), ",")}')
-  endif
-  " japanese -> english terms
-  return s:reverse_candidates(cand)
-endfunction
-function! s:reverse_candidates(cand)
-  let _ = []
-  for c in a:cand
-    for v in c.values
-      call add(_, {"word": v.word, "menu": !empty(v.desc) ? v.desc : c.label })
-    endfor
-  endfor
-  return _
-endfunction
+tnoremap <Esc> <C-\><C-n>
 
