@@ -7,20 +7,48 @@ export XDG_CONFIG_HOME=$HOME/.config
 
 # Get dotfiles
 echo "2. Download Dotfiles"
-if [ ! -e  $dotfiles ]; then
-  git clone https://github.com/i-amd3/dotfiles $dotfiles
-  mkdir -p $dotfiles/vim
-  mkdir -p $XDG_CONFIG_HOME
+if [ -e  $dotfiles ]; then
+  rm -rf $dotfiles
 fi
+git clone https://github.com/i-amd3/dotfiles $dotfiles
+
+SRCPKGS=(
+  $dotfiles/vim
+  $XDG_CONFIG_HOME
+  )
+
+for target in ${SRCPKGS[@]}
+do
+  if [ -e  $target ]; then
+    rm -rf $target
+  fi
+  mkdir -p target
+done
+
 
 # Create symbolic link
 echo "3. Create symbolic link"
-ln -sf $dotfiles/vim    $XDG_CONFIG_HOME/nvim
-ln -sf $dotfiles/vimrc  $XDG_CONFIG_HOME/nvim/init.vim
+SRCPKGS=(
+  $XDG_CONFIG_HOME/nvim
+  $XDG_CONFIG_HOME/nvim/init.vim
+  $HOME/.vim
+  $HOME/.vimrc
+  $HOME/.zshrc
+  )
 
-ln -sf $dotfiles/vim    $HOME/.vim
-ln -sf $dotfiles/vimrc  $HOME/.vimrc
-ln -sf $dotfiles/zshrc  $HOME/.zshrc
+for target in ${SRCPKGS[@]}
+do
+  if [ -e  $target ]; then
+    rm -rf $target
+  fi
+done
+
+ln -sf $dotfiles/vim    $SRCPKGS[1]
+ln -sf $dotfiles/vimrc  $SRCPKGS[2]
+
+ln -sf $dotfiles/vim    $SRCPKGS[3]
+ln -sf $dotfiles/vimrc  $SRCPKGS[4]
+ln -sf $dotfiles/zshrc  $SRCPKGS[5]
 
 # Install Homebrew
 echo "4. Install Homebrew"

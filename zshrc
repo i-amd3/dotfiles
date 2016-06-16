@@ -17,25 +17,6 @@ export XDG_CONFIG_HOME=$HOME/.config
 # zplug 初期設定(
 source $HOME/.zplug/zplug
 
-# zshプラグイン
-zplug "plugins/git",  from:oh-my-zsh, as:plugin
-zplug "plugins/git-flow-completion",  from:oh-my-zsh, as:plugin
-zplug "plugins/stack",  from:oh-my-zsh, as:plugin
-zplug "plugins/cabal",  from:oh-my-zsh, as:plugin
-zplug "plugins/brew",  from:oh-my-zsh, as:plugin
-zplug "plugins/vagrant",  from:oh-my-zsh, as:plugin
-zplug "plugins/fabric",  from:oh-my-zsh, as:plugin
-
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting"
-
-zplug "mafredri/zsh-async"
-zplug "sindresorhus/pure"
-
-# zshプラグインのインストール
-zplug check || zplug install
-zplug load
-
 # viライクな操作
 bindkey -v
 
@@ -140,4 +121,23 @@ function peco_select_history() {
 }
 zle -N peco_select_history
 bindkey '^R' peco_select_history
+
+# zshプラグイン
+zplug "plugins/git",  from:oh-my-zsh
+zplug "plugins/git-flow-completion",  from:oh-my-zsh
+zplug "plugins/stack",  from:oh-my-zsh
+zplug "plugins/cabal",  from:oh-my-zsh
+zplug "plugins/brew",  from:oh-my-zsh
+zplug "plugins/vagrant",  from:oh-my-zsh
+zplug "plugins/fabric",  from:oh-my-zsh
+
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting"
+
+zplug "mafredri/zsh-async"
+zplug "sindresorhus/pure"
+
+# zshプラグインのインストール
+zplug check || zplug install
+zplug load
 
