@@ -222,7 +222,6 @@ let g:lightline = {
       \ },
       \ 'component': {
       \   'date': '%{Date()}',
-      \   'filelen': '%{b:charCounterCount}',
       \   'readonly': '%{&readonly?"x":""}',
       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
       \ },
@@ -254,7 +253,7 @@ autocmd _vimrc FileType haskell let g:haskell_conceal_enumerations = 0
 
 " Setting necoghc
 autocmd _vimrc FileType haskell let g:haskellmode_completion_ghc = 1
-autocmd _vimrc FileType haskell let g:necoghc_enable_detailed_browse = 1
+autocm  _vimrc FileType haskell let g:necoghc_enable_detailed_browse = 1
 
 autocmd _vimrc FileType haskell let g:tagbar_type_haskell = {
     \ 'ctagsbin'  : 'hasktags',
@@ -293,7 +292,7 @@ autocmd _vimrc FileType haskell let g:tagbar_type_haskell = {
 " Function
 "---------------------------------------
 " TODO
-autocmd! _vimrc QuickFixCmdPost *grep* cwindow
+autocmd _vimrc QuickFixCmdPost *grep* cwindow
 
 " TODO
 function! Date()
@@ -307,34 +306,10 @@ endfunction
 
 " TODO
 if has('syntax')
-    augroup ZenkakuSpace
-        autocmd!
-        autocmd ColorScheme       * call ZenkakuSpace()
-        autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
-    augroup END
+    autocmd _vimrc ColorScheme       * call ZenkakuSpace()
+    autocmd _vimrc VimEnter,WinEnter * match ZenkakuSpace /　/
     call ZenkakuSpace()
 endif
-
-" TODO
-augroup CharCounter
-    autocmd!
-    autocmd BufNew,BufEnter,BufWrite,InsertLeave * call <SID>Update()
-augroup END
-
-" TODO
-function! s:Update()
-    let b:charCounterCount = s:CharCount()
-endfunction
-
-" TODO
-function! s:CharCount()
-    let l:result = 0
-    for l:linenum in range(0, line('$'))
-        let l:line = getline(l:linenum)
-        let l:result += strlen(substitute(l:line, ".", "x", "g"))
-    endfor
-    return l:result
-endfunction
 
 " TODO Rewrite
 " command! -nargs=? FiveTenets call Fivetenets(<args>)
@@ -449,7 +424,10 @@ nnoremap <Leader>f :vim<Space>"<C-r><C-w>"<Space><C-r>=getcwd()<CR>/**
 nnoremap <Leader>bn :bnext<CR>
 nnoremap <Leader>bp :bprevious<CR>
 
-tnoremap <Esc> <C-\><C-n>
+" --- Neovim
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+endif
 
 " --- Haskell
 " ---
