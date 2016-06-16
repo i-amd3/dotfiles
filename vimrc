@@ -242,7 +242,11 @@ autocmd _vimrc FileType rust let $RUST_SRC_PATH="$HOME/dotfiles/etc/rustc-1.9.0/
 " -- Haskell Settings
 " --
 " run cmd when filetype is haskell
+autocmd _vimrc BufWritePost FileType haskell GhcModCheckAndLintAsync
+
+" Setting Auto-completion
 autocmd _vimrc FileType haskell setlocal omnifunc=necoghc#omnifunc
+autocmd _vimrc FileType haskell let g:necoghc_enable_detailed_browse = 1
 
 " Setting Haskell File
 autocmd _vimrc FileType haskell let g:haskell_conceal              = 0
@@ -447,3 +451,12 @@ nnoremap <Leader>bp :bprevious<CR>
 
 tnoremap <Esc> <C-\><C-n>
 
+" --- Haskell
+" ---
+autocmd _vimrc FileType haskell nnoremap <buffer> <F5>   :Unite haskellimport<CR>
+autocmd _vimrc FileType haskell nnoremap <buffer> <F6>   :Hoogle
+autocmd _vimrc FileType haskell nnoremap <buffer> <F7>   :TagbarToggle<CR>
+
+autocmd _vimrc FileType haskell nnoremap <buffer> <Space>ht :GhcModType<CR>
+autocmd _vimrc FileType haskell nnoremap <buffer> <Space>hc :GhcModTypeClear<CR>
+autocmd _vimrc FileType haskell nnoremap <buffer> <Space>hi :GhcModTypeInsert<CR>
