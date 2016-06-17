@@ -232,11 +232,11 @@ let g:lightline = {
 " -- Rust Settings
 " --
 autocmd _vimrc FileType rust let g:rustfmt_autosave = 1
-autocmd _vimrc FileType rust let g:rustfmt_command = '$HOME/.cargo/bin/rustfmt'
+autocmd _vimrc FileType rust let g:rustfmt_command =  expand('$HOME/.cargo/bin/rustfmt')
 
 autocmd _vimrc FileType rust set hidden
-autocmd _vimrc FileType rust let g:racer_cmd = '$HOME/.cargo/bin/racer'
-autocmd _vimrc FileType rust let $RUST_SRC_PATH="$HOME/dotfiles/etc/rustc-1.9.0/src/"
+autocmd _vimrc FileType rust let g:racer_cmd = expand('$HOME/.cargo/bin/racer')
+autocmd _vimrc FileType rust let $RUST_SRC_PATH=expand('$HOME/dotfiles/etc/rust/src/')
 
 " -- Haskell Settings
 " --
