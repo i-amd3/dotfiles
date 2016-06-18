@@ -12,7 +12,7 @@ export PATH=$HOME/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
-export RUST_SRC_PATH=$HOME/dotfiles/etc/rust/src/
+export RUST_SRC_PATH=$HOME/dotfiles/etc/rustc/src/
 
 export XDG_CONFIG_HOME=$HOME/.config
 

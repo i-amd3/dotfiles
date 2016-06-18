@@ -22,7 +22,11 @@ call plug#begin('$HOME/.vim/plugged')
   function! DoRemote(arg)
     UpdateRemotePlugins
   endfunction
-  Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+  else
+    Plug 'Shougo/neocomplete.vim'
+  endif
   Plug 'Shougo/vimproc.vim', { 'do': 'make' }
   Plug 'Shougo/unite.vim'
 
@@ -38,8 +42,10 @@ call plug#begin('$HOME/.vim/plugged')
   " Delete/add comment
   Plug 'tpope/vim-commentary'
 
-  " TODO
+  " TODO -> vim-airline
   Plug 'itchyny/lightline.vim'
+
+  " TODO
   Plug 'yuratomo/w3m.vim'
 
   "----------------------------------
@@ -53,6 +59,8 @@ call plug#begin('$HOME/.vim/plugged')
 
   " TODO
   Plug 'tpope/vim-fugitive'
+
+  " TODO
   Plug 'tpope/vim-git'
 
   " TODO
@@ -76,7 +84,6 @@ call plug#begin('$HOME/.vim/plugged')
   " Add import
   Plug 'ujihisa/unite-haskellimport', { 'for': 'haskell' }
 
-
   "----------------------------------
   " purescript
   "---------------------------------
@@ -85,7 +92,6 @@ call plug#begin('$HOME/.vim/plugged')
 
   " psc-ide plugin
   Plug 'FrigoEU/psc-ide-vim', { 'for': 'purescript' }
-
 
   "----------------------------------
   " Rust
@@ -98,11 +104,9 @@ call plug#begin('$HOME/.vim/plugged')
 
 call plug#end()
 
-
 "----------------------------------------
 " Vim settings
 "---------------------------------------
-filetype on
 filetype plugin indent on
 
 colorscheme koehler
@@ -153,6 +157,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 
+" TODO
 set clipboard+=unnamed
 
 " Gui Font
@@ -177,14 +182,18 @@ set visualbell t_vb=
 " Set tags files
 set tags=tags;/,codex.tags;/
 
-
 "----------------------------------------
 " Variable
 "---------------------------------------
 let mapleader = "\<Space>"
 
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
+" TODO Use deoplete or.
+if has('nvim')
+  let g:deoplete#enable_at_startup = 1
+else
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#use_vimproc = 1
+endif
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -196,7 +205,6 @@ let g:UltiSnipsEditSplit="vertical"
 
 " TODO
 let g:w3m#command = '/usr/local/Cellar/w3m/0.5.3/bin/w3m'
-
 
 " TODO
 if has('conceal')
@@ -236,7 +244,7 @@ autocmd _vimrc FileType rust let g:rustfmt_command =  expand('$HOME/.cargo/bin/r
 
 autocmd _vimrc FileType rust set hidden
 autocmd _vimrc FileType rust let g:racer_cmd = expand('$HOME/.cargo/bin/racer')
-autocmd _vimrc FileType rust let $RUST_SRC_PATH=expand('$HOME/dotfiles/etc/rust/src/')
+autocmd _vimrc FileType rust let $RUST_SRC_PATH=expand('$HOME/dotfiles/etc/rustc/src/')
 
 " -- Haskell Settings
 " --
@@ -255,6 +263,7 @@ autocmd _vimrc FileType haskell let g:haskell_conceal_enumerations = 0
 autocmd _vimrc FileType haskell let g:haskellmode_completion_ghc = 1
 autocm  _vimrc FileType haskell let g:necoghc_enable_detailed_browse = 1
 
+" TODO
 autocmd _vimrc FileType haskell let g:tagbar_type_haskell = {
     \ 'ctagsbin'  : 'hasktags',
     \ 'ctagsargs' : '-x -c -o-',
@@ -287,7 +296,6 @@ autocmd _vimrc FileType haskell let g:tagbar_type_haskell = {
     \ }
     \ }
 
-
 "----------------------------------------
 " Function
 "---------------------------------------
@@ -313,7 +321,6 @@ endif
 
 " TODO Rewrite
 " command! -nargs=? FiveTenets call Fivetenets(<args>)
-
 
 "----------------------------------------
 " KeyMapping
