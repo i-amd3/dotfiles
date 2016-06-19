@@ -22,7 +22,7 @@ do
   if [ -e  $target ]; then
     rm -rf $target
   fi
-  mkdir -p target
+  mkdir -p $target
 done
 
 
