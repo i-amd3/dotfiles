@@ -43,12 +43,12 @@ do
   fi
 done
 
-ln -sf $dotfiles/vim    $SRCPKGS[1]
-ln -sf $dotfiles/vimrc  $SRCPKGS[2]
+ln -sf $dotfiles/vim    ${SRCPKGS[1]}
+ln -sf $dotfiles/vimrc  ${SRCPKGS[2]}
 
-ln -sf $dotfiles/vim    $SRCPKGS[3]
-ln -sf $dotfiles/vimrc  $SRCPKGS[4]
-ln -sf $dotfiles/zshrc  $SRCPKGS[5]
+ln -sf $dotfiles/vim    ${SRCPKGS[3]}
+ln -sf $dotfiles/vimrc  ${SRCPKGS[4]}
+ln -sf $dotfiles/zshrc  ${SRCPKGS[5]}
 
 # Install Homebrew
 echo "4. Install Homebrew"
