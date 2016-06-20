@@ -190,6 +190,7 @@ let mapleader = "\<Space>"
 " TODO Use deoplete or.
 if has('nvim')
   let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_smart_case = 1
 else
   let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#use_vimproc = 1
@@ -240,11 +241,11 @@ let g:lightline = {
 " -- Rust Settings
 " --
 autocmd _vimrc FileType rust let g:rustfmt_autosave = 1
-autocmd _vimrc FileType rust let g:rustfmt_command =  expand('$HOME/.cargo/bin/rustfmt')
+autocmd _vimrc FileType rust let g:rustfmt_command = expand('$HOME/.cargo/bin/rustfmt')
 
-autocmd _vimrc FileType rust set hidden
+" autocmd _vimrc FileType rust set hidden
 autocmd _vimrc FileType rust let g:racer_cmd = expand('$HOME/.cargo/bin/racer')
-autocmd _vimrc FileType rust let $RUST_SRC_PATH=expand('$HOME/dotfiles/etc/rustc/src/')
+autocmd _vimrc FileType rust let $RUST_SRC_PATH = expand('$HOME/dotfiles/etc/rustc/src/')
 
 " -- Haskell Settings
 " --
@@ -256,7 +257,7 @@ autocmd _vimrc FileType haskell setlocal omnifunc=necoghc#omnifunc
 autocmd _vimrc FileType haskell let g:necoghc_enable_detailed_browse = 1
 
 " Setting Haskell File
-autocmd _vimrc FileType haskell let g:haskell_conceal              = 0
+autocmd _vimrc FileType haskell let g:haskell_conceal = 0
 autocmd _vimrc FileType haskell let g:haskell_conceal_enumerations = 0
 
 " Setting necoghc
