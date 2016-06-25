@@ -182,9 +182,10 @@ fi
 
 # Install Rust
 echo "11. install Rust"
-if test ! $(which rustc); then
-  curl -sSf https://static.rust-lang.org/rustup.sh | sh
+if test ! $(which rustup); then
+  curl https://sh.rustup.rs -sSf | sh
 fi
+source $HOME/.cargo/env
 cargo install rustfmt
 cargo install racer
 
