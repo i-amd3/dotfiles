@@ -1,0 +1,6 @@
+[localmac]
+localhost
+
+[localmac:vars]
+dotfiles={{ansible_env.HOME}}/dotfiles
+xdg_config_dir={{ansible_env.HOME}}/.config

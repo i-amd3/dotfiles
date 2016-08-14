@@ -1,0 +1,131 @@
+- name: Setup Dotfiles
+  hosts: localmac
+  connection: local
+  vars:
+    branch: master
+    vimdir: "{{dotfiles}}/vim"
+  tasks:
+    - name: Git Clone
+      git: repo=git@github.com:i-amd3/dotfiles.git dest={{dotfiles}} version={{branch}}
+
+    - name: Mkdir
+      file: path={{item}} state=directory
+      with_items:
+        - "{{vimdir}}"
+        - "{{xdg_config_dir}}"
+        - "{{dotfiles}}/etc"
+
+    - name: Create symbolic link
+      file: src={{item.src}} dest={{item.dest}} state=link
+      with_items:
+        - { src: "{{dotfiles}}/vim",    dest: "{{xdg_config_dir}}/nvim" }
+        - { src: "{{dotfiles}}/vimrc",  dest: "{{xdg_config_dir}}/nvim/init.vim" }
+        - { src: "{{dotfiles}}/vim",    dest: "{{ansible_env.HOME}}/.vim" }
+        - { src: "{{dotfiles}}/vimrc",  dest: "{{ansible_env.HOME}}/.vimrc" }
+        - { src: "{{dotfiles}}/zshrc",  dest: "{{ansible_env.HOME}}/.zshrc" }
+
+- name: Homebrew
+  hosts: localmac
+  connection: local
+  tasks:
+    - name: Add homebrew tap repositories
+      homebrew_tap: tap={{ item }} state=present
+      with_items:
+        - caskroom/cask
+
+    - name: Update homebrew
+      homebrew: update_homebrew=yes
+
+    - name: Upgrade homebrew
+      homebrew: upgrade_all=yes
+
+    - name: Install homebrew Packages
+      homebrew: name="{{item}}" state=latest
+      with_items:
+        - ctags
+        - git
+        - git-flow
+        - gnu-tar
+        - haskell-stack
+        - httpie
+        - jq
+        - jo
+        - macvim
+        - neovim/neovim/neovim
+        - node
+        - p7zip
+        - pandoc
+        - peco
+        - purescript
+        - python
+        - python3
+        - tree
+        - wget
+        - w3m
+        - zsh
+
+    - name: Linkapps homebrew macvim
+      command: brew Linkapps macvim
+
+    - name: Install homebrew Cask Packages
+      homebrew_cask: name="{{item}}" state=present
+      with_items:
+        - google-chrome
+        - google-japanese-ime
+        - iterm2
+        - virtualbox
+        - vagrant
+        - vagrant-manager
+
+    - name: Cleanup homebrew
+      command: brew cleanup
+
+    - name: Cleanup homebrew cask
+      command: brew cask cleanup
+
+- name: Pip
+  hosts: localmac
+  connection: local
+  tasks:
+    - name: install pip
+      command: pip install --upgrade pip setuptools neovim cryptography
+
+    - name: install pip3
+      command: pip3 install --upgrade pip setuptools neovim cryptography
+
+- name: Vimplug
+  hosts: localmac
+  connection: local
+  tasks:
+    - name: install
+      get_url: url=https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim dest={{dotfiles}}/vim/autoload force=yes
+
+- name: Zplug
+  hosts: localmac
+  connection: local
+  vars:
+    branch: master
+  tasks:
+    - name: Git Clone
+      git: repo=git@github.com:b4b4r07/zplug.git dest="{{dotfiles}}/etc/zplug" version={{branch}}
+
+    - name: Create symbolic link
+      file: src="{{dotfiles}}/etc/zplug" dest="{{ansible_env.HOME}}/.zplug" state=link
+
+- name: Git
+  hosts: localmac
+  connection: local
+  vars:
+    name: i-amd3
+    email: d.kupanhy@gmail.com
+    editor: vim
+  tasks:
+    - name: Setting git name
+      git_config: name=user.name scope=global value="{{name}}"
+
+    - name: Setting git email
+      git_config: name=user.email scope=global value="{{email}}"
+
+    - name: Setting git editor
+      git_config: name=core.editor scope=global value="{{editor}}"
+
