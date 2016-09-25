@@ -43,13 +43,13 @@
       homebrew: name="{{item}}" state=latest
       with_items:
         - ctags
+        - docker
+        - docker-machine
         - git
         - git-flow
         - gnu-tar
         - haskell-stack
-        - httpie
         - jq
-        - jo
         - macvim
         - neovim/neovim/neovim
         - node
@@ -64,8 +64,12 @@
         - w3m
         - zsh
 
-    - name: Linkapps homebrew macvim
-      command: brew Linkapps macvim
+    - name: Linkapps homebrew
+      command: brew link "{{item}}"
+      with_items:
+        - macvim
+        - python
+        - python3
 
     - name: Install homebrew Cask Packages
       homebrew_cask: name="{{item}}" state=present

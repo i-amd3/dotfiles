@@ -4,11 +4,8 @@ export EDITOR=nvim
 export LANG=ja_JP.UTF-8
 export TERM=xterm-256color
 
-export PGDATA=/usr/local/var/postgres
 export PATH=$HOME/.cabal/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
-export PATH=/usr/local/share/python:$PATH
-export PATH=$HOME/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
@@ -17,7 +14,7 @@ export RUST_SRC_PATH=$HOME/dotfiles/etc/rustc/src/
 export XDG_CONFIG_HOME=$HOME/.config
 
 # zplug 初期設定(
-source $HOME/.zplug/zplug
+source $HOME/.zplug/init.zsh
 
 # viライクな操作
 bindkey -v
@@ -26,6 +23,22 @@ bindkey -v
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
+
+# 履歴に重複したコマンドがある場合は古い方を削除
+setopt hist_save_nodups
+
+# 同じコマンドを履歴に保存しない
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+
+# スペースから始まるコマンドは保存しない
+setopt hist_ignore_space
+
+# 履歴に保存するときに余分なスペースを削除
+setopt hist_reduce_blanks
+
+# リアルタイムで履歴を共有する
+setopt share_history
 
 # 色の有効
 autoload -Uz colors
@@ -60,19 +73,6 @@ setopt pushd_ignore_dups
 # beepを無効
 setopt no_beep
 
-# 履歴に重複したコマンドがある場合は古い方を削除
-setopt hist_save_nodups
-
-# 同じコマンドを履歴に保存しない
-setopt hist_ignore_dups
-setopt hist_ignore_all_dups
-
-# スペースから始まるコマンドは保存しない
-setopt hist_ignore_space
-
-# 履歴に保存するときに余分なスペースを削除
-setopt hist_reduce_blanks
-
 # neovimで開く
 alias vim='nvim'
 
@@ -90,12 +90,10 @@ alias ll='ls -l'
 alias lla='ls -la'
 
 alias rm='rm -i'
-alias cp='cp'
+alias cp='cp -i'
 alias mv='mv -i'
 
 alias mkdir='mkdir -p'
-
-alias sudo='sudo '
 
 alias -g L='| less'
 alias -g G='| grep'
@@ -108,6 +106,8 @@ alias reload='source ~/.zshrc'
 alias ghc='stack ghc'
 alias ghci='stack ghci'
 alias runghc='stack runghc'
+
+alias hawk='stack exec hawk'
 
 # peco設定
 function peco_select_history() {
@@ -138,10 +138,15 @@ zplug "plugins/vi-mode",  from:oh-my-zsh
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
 
-zplug "mafredri/zsh-async"
-zplug "sindresorhus/pure"
+# zshプラグインの設定
+if ! zplug check; then
+  zplug install
+fi
 
-# zshプラグインのインストール
-zplug check || zplug install
 zplug load
+
+# プロンプト(現在のディレクトリ、ブランチ表示)
+PROMPT="
+ %{${fg[green]}%}%~%{${reset_color}%}
+[%n]$ "
 
