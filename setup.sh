@@ -34,6 +34,7 @@ SRCPKGS=(
   $HOME/.vim
   $HOME/.vimrc
   $HOME/.zshrc
+  $HOME/.hawk
   )
 
 for target in ${SRCPKGS[@]}
@@ -49,6 +50,8 @@ ln -sf $dotfiles/vimrc  ${SRCPKGS[2]}
 ln -sf $dotfiles/vim    ${SRCPKGS[3]}
 ln -sf $dotfiles/vimrc  ${SRCPKGS[4]}
 ln -sf $dotfiles/zshrc  ${SRCPKGS[5]}
+
+ln -sf $dotfiles/hawk  ${SRCPKGS[5]}
 
 # Install Homebrew
 echo "4. Install Homebrew"

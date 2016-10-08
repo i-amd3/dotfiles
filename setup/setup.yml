@@ -23,6 +23,7 @@
         - { src: "{{dotfiles}}/vim",    dest: "{{ansible_env.HOME}}/.vim" }
         - { src: "{{dotfiles}}/vimrc",  dest: "{{ansible_env.HOME}}/.vimrc" }
         - { src: "{{dotfiles}}/zshrc",  dest: "{{ansible_env.HOME}}/.zshrc" }
+        - { src: "{{dotfiles}}/hawk",  dest: "{{ansible_env.HOME}}/.hawk" }
 
 - name: Homebrew
   hosts: localmac
