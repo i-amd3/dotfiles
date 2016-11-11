@@ -2,6 +2,7 @@
 import Prelude
 import qualified Data.ByteString.Lazy.Char8 as B
 import qualified Data.List as L
+import qualified Data.Char as C
 
 -- Using: cat ~/test.sql | hawk -- -ad 'sqlInsert'
 -- $ cat ~/test.sql

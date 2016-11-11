@@ -48,6 +48,12 @@ call plug#begin('$HOME/.vim/plugged')
   " TODO
   Plug 'yuratomo/w3m.vim'
 
+  " TODO
+  Plug 'dhruvasagar/vim-table-mode'
+
+  " TODO
+  Plug 'i-amd3/BlockDiff'
+
   "----------------------------------
   " develop
   "---------------------------------
@@ -181,6 +187,9 @@ set visualbell t_vb=
 
 " Set tags files
 set tags=tags;/,codex.tags;/
+
+" TODO
+set ambiwidth=double
 
 "----------------------------------------
 " Variable
