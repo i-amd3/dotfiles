@@ -118,6 +118,10 @@ filetype plugin indent on
 colorscheme koehler
 syntax on
 
+" python provider
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
+
 " Filetype
 autocmd _vimrc BufRead,BufNewFile,BufWrite *.md set filetype=markdown
 autocmd _vimrc BufRead,BufNewFile,BufWrite *.hs set filetype=haskell

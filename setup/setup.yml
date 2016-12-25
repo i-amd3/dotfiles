@@ -44,19 +44,16 @@
       homebrew: name="{{item}}" state=latest
       with_items:
         - ctags
-        - docker
-        - docker-machine
         - git
         - git-flow
         - gnu-tar
         - haskell-stack
         - jq
         - macvim
-        - neovim/neovim/neovim
+        - neovim
         - node
         - p7zip
         - pandoc
-        - peco
         - purescript
         - python
         - python3

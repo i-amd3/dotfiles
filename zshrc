@@ -109,44 +109,47 @@ alias runghc='stack runghc'
 
 alias hawk='stack exec hawk'
 
-# peco設定
-function peco_select_history() {
-  local tac
-  if which tac > /dev/null; then
-    tac="tac"
-  else
-    tac="tail -r"
-  fi
-  BUFFER=$(fc -l -n 1 | eval $tac | awk '!a[$0]++' | peco --query "$LBUFFER")
-  CURSOR=$#BUFFER
-  zle -R -c
-}
-zle -N peco_select_history
-bindkey '^R' peco_select_history
-
-# zshプラグイン
+# TODO zshプラグイン
 zplug "plugins/git",  from:oh-my-zsh
 zplug "plugins/git-flow",  from:oh-my-zsh
 zplug "plugins/stack",  from:oh-my-zsh
-zplug "plugins/cabal",  from:oh-my-zsh
+# zplug "plugins/cabal",  from:oh-my-zsh
 zplug "plugins/brew",  from:oh-my-zsh
 zplug "plugins/vagrant",  from:oh-my-zsh
 zplug "plugins/fabric",  from:oh-my-zsh
-zplug "plugins/rust",  from:oh-my-zsh
+# zplug "plugins/rust",  from:oh-my-zsh
 zplug "plugins/vi-mode",  from:oh-my-zsh
 
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
 
 # zshプラグインの設定
-if ! zplug check; then
+if ! zplug check --verbose; then
   zplug install
 fi
 
-zplug load
+zplug load --verbose
+
+autoload -Uz vcs_info
+setopt prompt_subst
+
+# TODO
+zstyle ':vcs_info:git:*' check-for-changes true
+# zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+# zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+# zstyle ':vcs_info:*' formats "%F{blue}%c%u[%b]%f"
+zstyle ':vcs_info:*' formats "[%b]"
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
 
 # プロンプト(現在のディレクトリ、ブランチ表示)
-PROMPT="
- %{${fg[green]}%}%~%{${reset_color}%}
-[%n]$ "
+
+precmd () {
+  psvar=()
+  LANG=en_US.UTF-8 vcs_info
+  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+}
+
+# TODO
+PROMPT=" %{${fg[green]}%}%~%{${reset_color}%} %F{blue}%1v%f
+> "
 
