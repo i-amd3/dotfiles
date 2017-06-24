@@ -1,29 +1,34 @@
+# - name: Download Dotfiles
+#   hosts: localmac
+#   connection: local
+#   vars:
+#     branch: master
+#   tasks:
+#     - name: Git Clone
+#       git: repo=git@github.com:i-amd3/dotfiles.git dest={{dotfiles}} version={{branch}}
+
 - name: Setup Dotfiles
   hosts: localmac
   connection: local
   vars:
-    branch: master
     vimdir: "{{dotfiles}}/vim"
   tasks:
-    - name: Git Clone
-      git: repo=git@github.com:i-amd3/dotfiles.git dest={{dotfiles}} version={{branch}}
-
     - name: Mkdir
       file: path={{item}} state=directory
       with_items:
         - "{{vimdir}}"
+        - "{{vimdir}}/autoload"
         - "{{xdg_config_dir}}"
-        - "{{dotfiles}}/etc"
+        - "{{fish_dir}}"
 
     - name: Create symbolic link
       file: src={{item.src}} dest={{item.dest}} state=link
       with_items:
-        - { src: "{{dotfiles}}/vim",    dest: "{{xdg_config_dir}}/nvim" }
-        - { src: "{{dotfiles}}/vimrc",  dest: "{{xdg_config_dir}}/nvim/init.vim" }
-        - { src: "{{dotfiles}}/vim",    dest: "{{ansible_env.HOME}}/.vim" }
-        - { src: "{{dotfiles}}/vimrc",  dest: "{{ansible_env.HOME}}/.vimrc" }
-        - { src: "{{dotfiles}}/zshrc",  dest: "{{ansible_env.HOME}}/.zshrc" }
-        - { src: "{{dotfiles}}/hawk",  dest: "{{ansible_env.HOME}}/.hawk" }
+        - { src: "{{dotfiles}}/vim",          dest: "{{xdg_config_dir}}/nvim" }
+        - { src: "{{dotfiles}}/vimrc",        dest: "{{xdg_config_dir}}/nvim/init.vim" }
+        - { src: "{{dotfiles}}/vim",          dest: "{{ansible_env.HOME}}/.vim" }
+        - { src: "{{dotfiles}}/vimrc",        dest: "{{ansible_env.HOME}}/.vimrc" }
+        - { src: "{{dotfiles}}/config_fish",  dest: "{{fish_dir}}/config.fish" }
 
 - name: Homebrew
   hosts: localmac
@@ -44,28 +49,25 @@
       homebrew: name="{{item}}" state=latest
       with_items:
         - ctags
+        - fish
+        - fzf
         - git
         - git-flow
         - gnu-tar
-        - haskell-stack
         - jq
         - macvim
-        - neovim
+        - neovim/neovim/neovim
         - node
-        - p7zip
         - pandoc
-        - purescript
         - python
         - python3
         - tree
         - wget
         - w3m
-        - zsh
 
     - name: Linkapps homebrew
       command: brew link "{{item}}"
       with_items:
-        - macvim
         - python
         - python3
 
@@ -99,20 +101,8 @@
   hosts: localmac
   connection: local
   tasks:
-    - name: install
-      get_url: url=https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim dest={{dotfiles}}/vim/autoload force=yes
-
-- name: Zplug
-  hosts: localmac
-  connection: local
-  vars:
-    branch: master
-  tasks:
-    - name: Git Clone
-      git: repo=git@github.com:b4b4r07/zplug.git dest="{{dotfiles}}/etc/zplug" version={{branch}}
-
-    - name: Create symbolic link
-      file: src="{{dotfiles}}/etc/zplug" dest="{{ansible_env.HOME}}/.zplug" state=link
+    - name: install vimplug
+      get_url: url=https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim dest={{dotfiles}}/vim/autoload/plug.vim force=yes
 
 - name: Git
   hosts: localmac
@@ -130,4 +120,14 @@
 
     - name: Setting git editor
       git_config: name=core.editor scope=global value="{{editor}}"
+
+- name: set fish as the default shell
+  hosts: localmac
+  connection: local
+  tasks:
+    - name: add fish-shell
+      command: sudo echo "/usr/local/bin/fish" >> /etc/shells
+
+    - name: change shell
+      command: chsh -s /usr/local/bin/fish
 

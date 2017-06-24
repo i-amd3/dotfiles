@@ -6,7 +6,6 @@ if !has('gui_running')
   set t_Co=256
 endif
 
-let $PATH = $PATH . ':' . expand('$HOME/bin/')
 let $PATH = $PATH . ':' . expand('$HOME/.cargo/bin')
 
 augroup _vimrc
@@ -18,21 +17,12 @@ augroup END
 "---------------------------------------
 call plug#begin('$HOME/.vim/plugged')
 
-  " Keyword Auto-completion
-  function! DoRemote(arg)
-    UpdateRemotePlugins
-  endfunction
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-  else
-    Plug 'Shougo/neocomplete.vim'
-  endif
-  Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-  Plug 'Shougo/unite.vim'
-
   "----------------------------------
   " util
   "---------------------------------
+  " Keyword Auto-completion
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
   " Repeatable f, F, t and T
   Plug 'rhysd/clever-f.vim'
 
@@ -49,10 +39,14 @@ call plug#begin('$HOME/.vim/plugged')
   Plug 'yuratomo/w3m.vim'
 
   " TODO
-  Plug 'dhruvasagar/vim-table-mode'
+  Plug 'i-amd3/BlockDiff'
 
   " TODO
-  Plug 'i-amd3/BlockDiff'
+  Plug 'justinmk/vim-dirvish'
+
+  " TODO
+  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf.vim'
 
   "----------------------------------
   " develop
@@ -64,40 +58,7 @@ call plug#begin('$HOME/.vim/plugged')
   Plug 'majutsushi/tagbar'
 
   " TODO
-  Plug 'tpope/vim-fugitive'
-
-  " TODO
-  Plug 'tpope/vim-git'
-
-  " TODO
-  Plug 'scrooloose/syntastic', { 'for': 'haskell' }
-
-  "----------------------------------
-  " haskell
-  "---------------------------------
-  " Syntax Highlighting and Indentation
-  Plug 'dag/vim2hs', { 'for': 'haskell' }
-
-  " ghc-mod plugin
-  Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
-
-  " Auto-completion for haskell
-  Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
-
-  " Hoogle plugin
-  Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
-
-  " Add import
-  Plug 'ujihisa/unite-haskellimport', { 'for': 'haskell' }
-
-  "----------------------------------
-  " purescript
-  "---------------------------------
-  " Syntax Highlighting and Indentation
-  Plug 'raichoo/purescript-vim', { 'for': 'purescript' }
-
-  " psc-ide plugin
-  Plug 'FrigoEU/psc-ide-vim', { 'for': 'purescript' }
+  Plug 'w0rp/ale', { 'for': [ 'perl', 'python', 'rust' ] }
 
   "----------------------------------
   " Rust
@@ -107,6 +68,21 @@ call plug#begin('$HOME/.vim/plugged')
 
   " Auto-completion for Rust
   Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+
+  "----------------------------------
+  " TODO Perl
+  "---------------------------------
+
+  "----------------------------------
+  " TODO python
+  "---------------------------------
+
+  "----------------------------------
+  " HTML or MD
+  "---------------------------------
+  " TODO
+  Plug 'dhruvasagar/vim-table-mode', { 'for': [ 'html', 'md' ] }
+
 
 call plug#end()
 
@@ -124,76 +100,37 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Filetype
 autocmd _vimrc BufRead,BufNewFile,BufWrite *.md set filetype=markdown
-autocmd _vimrc BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
-autocmd _vimrc BufRead,BufNewFile,BufWrite *.purs set filetype=purescript
 autocmd _vimrc BufRead,BufNewFile,BufWrite *.rs set filetype=rust
 
-" Doesn't wrap
-set nowrap
-
-" the case of normal letters is ignore
-set ignorecase
-
-" When start a new line with <CR> in insert mode or command
-set autoindent
-
-" show the line and column number
-set ruler
-
-" show the line number
-set number
+set nowrap                    " Doesn't wrap
+set ignorecase                " the case of normal letters is ignore
+set autoindent                " When start a new line with \<CR\> in insert mode or command
+set ruler                     " show the line and column number
+set number                    " show the line number
+set wildmenu                  " Command-line completion
+set expandtab                 " Insert space using <TAB>
+set smarttab                  " For shiftwidth
+set tabstop=2                 " Number of spaces that a <TAB>
+set clipboard+=unnamed        " TODO
+set laststatus=2              " dispay status line
+set nobackup                  " Not create backup
+set noswapfile                " Not create swap
+set viminfo+=h                " Not create viminfo
+set visualbell t_vb=          " disable beeping
+set tags=tags;/,codex.tags;/  " Set tags files
+set ambiwidth=double          " TODO
 
 " Show tabs
 set list
 set listchars=tab:>.,trail:_,extends:>,precedes:<,nbsp:%
 
-" Command-line completion
-set wildmenu
-
-" coloring cursor line and column
-set cursorline
-set cursorcolumn
-
-" Insert space using <TAB>
-set expandtab
-
-" For shiftwidth
-set smarttab
-
-" Number of spaces that a <TAB>
-set tabstop=2
-
 " Number of spaces thas a insert indent
 set shiftwidth=2
 set softtabstop=2
 
-" TODO
-set clipboard+=unnamed
-
-" Gui Font
-set guifont=Ricty\ Discord:h16
-set guifontwide=Ricty\ Discord:h16
-
-" dispay status line
-set laststatus=2
-
-" Not create backup
-set nobackup
-
-" Not create swap
-set noswapfile
-
-" Not create viminfo
-set viminfo+=h
-
-" disable beeping
-set visualbell t_vb=
-
-" Set tags files
-set tags=tags;/,codex.tags;/
-
-" TODO
-set ambiwidth=double
+" coloring cursor line and column
+set cursorline
+set cursorcolumn
 
 "----------------------------------------
 " Variable
@@ -201,13 +138,8 @@ set ambiwidth=double
 let mapleader = "\<Space>"
 
 " TODO Use deoplete or.
-if has('nvim')
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#enable_smart_case = 1
-else
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#use_vimproc = 1
-endif
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -229,27 +161,8 @@ endif
 let g:syntastic_check_on_open = 1
 let g:syntastic_mode_map = {
     \ "mode": "active",
-    \ "active_filetypes": ["haskell","javascript","rust"],
+    \ "active_filetypes": ["perl","python","rust"],
     \ "passive_filetypes": [] }
-
-" TODO
-let g:lightline = {
-      \ 'colorscheme': 'landscape',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
-      \   'right': [ [ 'filelen', 'date' ],
-      \              [ 'syntastic', 'lineinfo' ], ['percent'],
-      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'component': {
-      \   'date': '%{Date()}',
-      \   'readonly': '%{&readonly?"x":""}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
-      \ },
-      \ 'separator': { 'lef': '', 'right': ''},
-      \ 'subseparator': { 'left': '|', 'right': '|'},
-      \ }
 
 " -- Rust Settings
 " --
@@ -259,56 +172,6 @@ autocmd _vimrc FileType rust let g:rustfmt_command = expand('$HOME/.cargo/bin/ru
 " autocmd _vimrc FileType rust set hidden
 autocmd _vimrc FileType rust let g:racer_cmd = expand('$HOME/.cargo/bin/racer')
 autocmd _vimrc FileType rust let $RUST_SRC_PATH = expand('$HOME/dotfiles/etc/rustc/src/')
-
-" -- Haskell Settings
-" --
-" run cmd when filetype is haskell
-autocmd _vimrc BufWritePost FileType haskell GhcModCheckAndLintAsync
-
-" Setting Auto-completion
-autocmd _vimrc FileType haskell setlocal omnifunc=necoghc#omnifunc
-autocmd _vimrc FileType haskell let g:necoghc_enable_detailed_browse = 1
-
-" Setting Haskell File
-autocmd _vimrc FileType haskell let g:haskell_conceal = 0
-autocmd _vimrc FileType haskell let g:haskell_conceal_enumerations = 0
-
-" Setting necoghc
-autocmd _vimrc FileType haskell let g:haskellmode_completion_ghc = 1
-autocm  _vimrc FileType haskell let g:necoghc_enable_detailed_browse = 1
-
-" TODO
-autocmd _vimrc FileType haskell let g:tagbar_type_haskell = {
-    \ 'ctagsbin'  : 'hasktags',
-    \ 'ctagsargs' : '-x -c -o-',
-    \ 'kinds'     : [
-        \  'm:modules:0:1',
-        \  'd:data: 0:1',
-        \  'd_gadt: data gadt:0:1',
-        \  't:type names:0:1',
-        \  'nt:new types:0:1',
-        \  'c:classes:0:1',
-        \  'cons:constructors:1:1',
-        \  'c_gadt:constructor gadt:1:1',
-        \  'c_a:constructor accessors:1:1',
-        \  'ft:function types:1:1',
-        \  'fi:function implementations:0:1',
-        \  'o:others:0:1'
-    \ ],
-    \ 'sro'        : '.',
-    \ 'kind2scope' : {
-        \ 'm' : 'module',
-        \ 'c' : 'class',
-        \ 'd' : 'data',
-        \ 't' : 'type'
-    \ },
-    \ 'scope2kind' : {
-        \ 'module' : 'm',
-        \ 'class'  : 'c',
-        \ 'data'   : 'd',
-        \ 'type'   : 't'
-    \ }
-    \ }
 
 "----------------------------------------
 " Function
@@ -367,15 +230,6 @@ vnoremap <Leader>h 0
 
 " TODO Rewrite
 " nnoremap <Space>ft :FiveTenets<CR>
-
-nnoremap <Leader>ga :Gwrite<CR>
-nnoremap <Leader>gr :Gread<CR>
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gc :Gcommit<CR>
-nnoremap <Leader>gl :Glog<CR>
-nnoremap <Leader>gd :Gdiff<CR>
-nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gm :Gremove<CR>
 
 " TODO DELETE ?
 " nnoremap <S-h> <S-i>
@@ -450,12 +304,3 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
 
-" --- Haskell
-" ---
-autocmd _vimrc FileType haskell nnoremap <buffer> <F5>   :Unite haskellimport<CR>
-autocmd _vimrc FileType haskell nnoremap <buffer> <F6>   :Hoogle
-autocmd _vimrc FileType haskell nnoremap <buffer> <F7>   :TagbarToggle<CR>
-
-autocmd _vimrc FileType haskell nnoremap <buffer> <Space>ht :GhcModType<CR>
-autocmd _vimrc FileType haskell nnoremap <buffer> <Space>hc :GhcModTypeClear<CR>
-autocmd _vimrc FileType haskell nnoremap <buffer> <Space>hi :GhcModTypeInsert<CR>
