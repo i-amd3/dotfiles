@@ -6,8 +6,6 @@ if !has('gui_running')
   set t_Co=256
 endif
 
-let $PATH = $PATH . ':' . expand('$HOME/.cargo/bin')
-
 augroup _vimrc
   autocmd!
 augroup END
@@ -29,45 +27,25 @@ call plug#begin('$HOME/.vim/plugged')
   " Delete/change/add parentheses
   Plug 'tpope/vim-surround'
 
-  " Delete/add comment
-  Plug 'tpope/vim-commentary'
-
-  " TODO -> vim-airline
+  " NOTE: vim-airline
   Plug 'itchyny/lightline.vim'
 
-  " TODO
+  " Text Browser
   Plug 'yuratomo/w3m.vim'
 
   " TODO
   Plug 'i-amd3/BlockDiff'
 
-  " TODO
-  Plug 'justinmk/vim-dirvish'
+  " Directory Viewer
+  Plug 'scrooloose/nerdtree'
 
-  " TODO
+  " Command line fuzzy finder
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
   Plug 'junegunn/fzf.vim'
 
   "----------------------------------
-  " develop
+  " TODO Haskell
   "---------------------------------
-  " Snippet engine | Contains snippets files
-  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
-  " View the tags of the current file
-  Plug 'majutsushi/tagbar'
-
-  " TODO
-  Plug 'w0rp/ale', { 'for': [ 'perl', 'python', 'rust' ] }
-
-  "----------------------------------
-  " Rust
-  "---------------------------------
-  " Syntax Highlighting and Indentation
-  Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-
-  " Auto-completion for Rust
-  Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 
   "----------------------------------
   " TODO Perl
@@ -80,9 +58,32 @@ call plug#begin('$HOME/.vim/plugged')
   "----------------------------------
   " HTML or MD
   "---------------------------------
-  " TODO
+  " automatic table formatter
   Plug 'dhruvasagar/vim-table-mode', { 'for': [ 'html', 'md' ] }
 
+  "----------------------------------
+  " develop
+  "---------------------------------
+  " Snippet engine | Contains snippets files
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+  " View the tags of the current file
+  Plug 'majutsushi/tagbar'
+
+  " Asynchronous Lint. See :ALEinfo if it isn't running
+  Plug 'w0rp/ale', { 'for': [ 'perl', 'python', 'haskell' ] }
+
+  " Delete/add comment
+  Plug 'tpope/vim-commentary'
+
+  " LSP client
+  Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
+
+  " git client
+  Plug 'lambdalisue/gina.vim'
 
 call plug#end()
 
@@ -99,9 +100,16 @@ let g:python_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Filetype
-autocmd _vimrc BufRead,BufNewFile,BufWrite *.md set filetype=markdown
-autocmd _vimrc BufRead,BufNewFile,BufWrite *.rs set filetype=rust
+autocmd _vimrc BufReadPost,BufRead,BufNewFile,BufWrite *.md set filetype=markdown
+autocmd _vimrc BufReadPost,BufRead,BufNewFile,BufWrite *.hs set filetype=haskell
 
+set backup                           " create backup
+set backupdir=$HOME/.vim/backup      " backupdir
+set swapfile                         " create swap
+set backupdir=$HOME/.vim/swap        " swapdir
+set undofile                         " create undo
+set undodir=$HOME/.vim/undo          " undodir
+set hidden
 set nowrap                    " Doesn't wrap
 set ignorecase                " the case of normal letters is ignore
 set autoindent                " When start a new line with \<CR\> in insert mode or command
@@ -113,12 +121,11 @@ set smarttab                  " For shiftwidth
 set tabstop=2                 " Number of spaces that a <TAB>
 set clipboard+=unnamed        " TODO
 set laststatus=2              " dispay status line
-set nobackup                  " Not create backup
-set noswapfile                " Not create swap
 set viminfo+=h                " Not create viminfo
 set visualbell t_vb=          " disable beeping
 set tags=tags;/,codex.tags;/  " Set tags files
 set ambiwidth=double          " TODO
+set cursorline                " coloring cursor line and column
 
 " Show tabs
 set list
@@ -128,16 +135,15 @@ set listchars=tab:>.,trail:_,extends:>,precedes:<,nbsp:%
 set shiftwidth=2
 set softtabstop=2
 
-" coloring cursor line and column
-set cursorline
-set cursorcolumn
-
 "----------------------------------------
 " Variable
 "---------------------------------------
 let mapleader = "\<Space>"
 
-" TODO Use deoplete or.
+" NERDTree
+let g:NERDTreeWinPos = "right"
+
+" Use deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 
@@ -150,28 +156,37 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 
 " TODO
-let g:w3m#command = '/usr/local/Cellar/w3m/0.5.3/bin/w3m'
+let g:w3m#command = '/usr/local/Cellar/w3m/0.5.3_5/bin/w3m'
 
 " TODO
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 
-" TODO
-let g:syntastic_check_on_open = 1
-let g:syntastic_mode_map = {
-    \ "mode": "active",
-    \ "active_filetypes": ["perl","python","rust"],
-    \ "passive_filetypes": [] }
-
-" -- Rust Settings
+" -- Tagbar Settings
 " --
-autocmd _vimrc FileType rust let g:rustfmt_autosave = 1
-autocmd _vimrc FileType rust let g:rustfmt_command = expand('$HOME/.cargo/bin/rustfmt')
+let g:tagbar_left = 1
+let g:tagbar_autofocus = 1
 
-" autocmd _vimrc FileType rust set hidden
-autocmd _vimrc FileType rust let g:racer_cmd = expand('$HOME/.cargo/bin/racer')
-autocmd _vimrc FileType rust let $RUST_SRC_PATH = expand('$HOME/dotfiles/etc/rustc/src/')
+" -- fzf Settings
+" --
+let g:fzf_layout = { 'up': '~30%' }
+let g:fzf_buffers_jump = 1
+
+
+" -- ale Settings
+" --
+let g:ale_open_list = 1
+
+" language servers Settings
+let g:LanguageClient_serverCommands = {
+    \ 'haskell': ['hie', '--lsp'],
+    \ 'python': ['pyls']
+    \ }
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 "----------------------------------------
 " Function
@@ -202,10 +217,6 @@ endif
 "----------------------------------------
 " KeyMapping
 "---------------------------------------
-" map /  <Plug>(incsearch-forward)
-" map ?  <Plug>(incsearch-backward)
-" map g/ <Plug>(incsearch-stay)
-
 nnoremap <Space> <Nop>
 vnoremap <Space> <Nop>
 nnoremap <DEL> <Nop>
@@ -294,7 +305,7 @@ inoremap >> <><LEFT>
 inoremap <C-f> <PageDown>
 inoremap <C-b> <PageUp>
 
-nnoremap <Leader>f :vim<Space>"<C-r><C-w>"<Space><C-r>=getcwd()<CR>/**
+nnoremap <Leader>g :vim<Space>"<C-r><C-w>"<Space><C-r>=getcwd()<CR>/**
 
 nnoremap <Leader>bn :bnext<CR>
 nnoremap <Leader>bp :bprevious<CR>
@@ -304,3 +315,17 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
 
+nnoremap <F3> :NERDTreeToggle<CR>
+nnoremap <F2> :TagbarToggle<CR>
+
+nnoremap <Leader>tj :exe("tjump ".expand('<cword>'))<CR>
+nnoremap <Leader>tv :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
+nnoremap <Leader>ts :split<CR> :exe("tjump ".expand('<cword>'))<CR>
+nnoremap <Leader>tb :pop<CR>
+
+nnoremap <Leader>ff :Files<CR>
+nnoremap <Leader>fb :Buffers<CR>
+nnoremap <leader>fm :Maps<CR>
+
+nmap <silent> <Leader>ek <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>ej <Plug>(ale_next_wrap)
