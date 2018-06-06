@@ -129,12 +129,12 @@ autoload -Uz vcs_info
 setopt prompt_subst
 
 # TODO
-zstyle ':vcs_info:git:*' check-for-changes true
+# zstyle ':vcs_info:git:*' check-for-changes true
 # zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
 # zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
 # zstyle ':vcs_info:*' formats "%F{blue}%c%u[%b]%f"
-zstyle ':vcs_info:*' formats "[%b]"
-zstyle ':vcs_info:*' actionformats '[%b|%a]'
+# zstyle ':vcs_info:*' formats "[%b]"
+# zstyle ':vcs_info:*' actionformats '[%b|%a]'
 
 # プロンプト(現在のディレクトリ、ブランチ表示)
 
