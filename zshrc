@@ -8,12 +8,21 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
 
 export XDG_CONFIG_HOME=$HOME/.config
+
+# nodejsの環境パスを通す
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # zplug 初期設定
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
+
+# rbenvにパスを通す
+[[ -d ~/.rbenv  ]] && \
+  export PATH=${HOME}/.rbenv/bin:${PATH} && \
+  eval "$(rbenv init -)"
 
 # viライクな操作
 bindkey -v
@@ -101,15 +110,9 @@ alias -g P='| peco'
 # 再読み込み
 alias reload='source ~/.zshrc'
 
-# Haskell
-alias ghc='stack ghc'
-alias ghci='stack ghci'
-alias runghc='stack runghc'
-
 # TODO zshプラグイン
 zplug "plugins/git",  from:oh-my-zsh
 zplug "plugins/git-flow",  from:oh-my-zsh
-zplug "plugins/stack",  from:oh-my-zsh
 zplug "plugins/brew",  from:oh-my-zsh
 zplug "plugins/vagrant",  from:oh-my-zsh
 zplug "plugins/fabric",  from:oh-my-zsh
@@ -147,4 +150,7 @@ precmd () {
 # TODO
 PROMPT=" %{${fg[green]}%}%~%{${reset_color}%} %F{blue}%1v%f
 > "
+
+# fzf読み込み
+source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 

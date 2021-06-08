@@ -1,12 +1,11 @@
-dotfiles
+# dotfiles
 
 ```
-curl -L 'https://raw.githubusercontent.com/i-amd3/dotfiles/master/setup.sh' | bash
+curl -L 'https://raw.githubusercontent.com/didy-kpn/dotfiles/master/setup.sh' | bash
 ```
 
-TODO
+# License
 
-* Modify install script
-* Add Update script
-* Add Uninstall script
+This project is licensed under the MIT License.
 
+See [LICENSE](https://github.com/didy-kpn/dotfiles/blob/master/LICENSE) for details.
