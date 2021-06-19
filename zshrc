@@ -5,7 +5,6 @@ export LANG=ja_JP.UTF-8
 export TERM=xterm-256color
 
 export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
@@ -114,8 +113,6 @@ alias reload='source ~/.zshrc'
 zplug "plugins/git",  from:oh-my-zsh
 zplug "plugins/git-flow",  from:oh-my-zsh
 zplug "plugins/brew",  from:oh-my-zsh
-zplug "plugins/vagrant",  from:oh-my-zsh
-zplug "plugins/fabric",  from:oh-my-zsh
 zplug "plugins/vi-mode",  from:oh-my-zsh
 
 zplug "zsh-users/zsh-completions"
@@ -131,16 +128,6 @@ zplug load --verbose
 autoload -Uz vcs_info
 setopt prompt_subst
 
-# TODO
-# zstyle ':vcs_info:git:*' check-for-changes true
-# zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
-# zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
-# zstyle ':vcs_info:*' formats "%F{blue}%c%u[%b]%f"
-# zstyle ':vcs_info:*' formats "[%b]"
-# zstyle ':vcs_info:*' actionformats '[%b|%a]'
-
-# プロンプト(現在のディレクトリ、ブランチ表示)
-
 precmd () {
   psvar=()
   LANG=en_US.UTF-8 vcs_info
@@ -153,4 +140,3 @@ PROMPT=" %{${fg[green]}%}%~%{${reset_color}%} %F{blue}%1v%f
 
 # fzf読み込み
 source "/usr/local/opt/fzf/shell/key-bindings.zsh"
-

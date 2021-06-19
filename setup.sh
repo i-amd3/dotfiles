@@ -17,7 +17,7 @@ mkdir -p "${XDG_CONFIG_HOME}"/nvim/swap
 mkdir -p "${XDG_CONFIG_HOME}"/nvim/undo
 mkdir -p "${XDG_CONFIG_HOME}"/nvim/sessions
 mkdir -p "${XDG_CONFIG_HOME}"/nvim/pack/paqs/opt
-git clone https://github.com/savq/paq-nvim "${XDG_CONFIG_HOME}"/nvim/pack/paqs/opt
+git clone https://github.com/savq/paq-nvim "${XDG_CONFIG_HOME}"/nvim/pack/paqs/opt/paq-nvim
 
 ln -s "${HOME}"/dotfiles/lua "${XDG_CONFIG_HOME}"/nvim/lua
 ln -s "${HOME}"/dotfiles/init.lua "${XDG_CONFIG_HOME}"/nvim/init.lua

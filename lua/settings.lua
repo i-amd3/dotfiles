@@ -1,8 +1,8 @@
 -- helper
-local cmd, g, opt = vim.cmd, vim.g, vim.opt
+local cmd, fn, g, opt = vim.cmd, vim.fn, vim.g, vim.opt
 
 -- options
-g.python3_host_prog = '/usr/local/bin/python3'
+g.python3_host_prog = fn.system('echo -n $(which python3)')
 
 cmd('filetype plugin indent on')
 cmd('colorscheme hybrid')
